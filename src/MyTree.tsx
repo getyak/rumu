@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './MyTree.css'
 
 /**
@@ -181,6 +182,9 @@ export default function MyTree() {
           <a className="link-muted" href="/read">
             回到阅读
           </a>
+          <Link className="link-muted" to="/book/heart-sutra">
+            心经 · 一本经的传记
+          </Link>
           <span
             className="link-muted"
             onClick={toggleNight}

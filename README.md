@@ -29,6 +29,30 @@ dark atmosphere. Everything respects `prefers-reduced-motion`.
 Per the design bible there are **no counts anywhere** — quantity is expressed by form,
 never a number badge — and cinnabar, the colour of the human hand, is used sparingly.
 
+## 一本经的传记 (Book Biography)
+
+A second page, reachable from 我的树's nav (`心经 · 一本经的传记`) or directly at
+`/book/heart-sutra`: the **书籍详情页** design — a book's biography — implemented
+for the **心经 (Heart Sutra)**, the shortest and most-repeated text in the
+Mahayana canon.
+
+Where 我的树 is one reader's private archive, this page is a book's public
+history: a vertical timeline from its Indian Prajñāpāramitā roots through
+Kumārajīva's 402 CE translation, Xuanzang's 649 CE definitive version, Huairen's
+672 CE Wang Xizhi calligraphy stele, anonymous Dunhuang manuscripts, Edward
+Conze's 1948 critical Sanskrit edition, its adoption into Western Zen practice,
+Jan Nattier's 1992 "Chinese apocryphal text" hypothesis (rendered as a
+side-by-side **经文在此改变**, "the text changes here", comparison — the same
+device the design uses for the *Tao Te Ching*'s Mawangdui silk manuscripts),
+Thich Nhat Hanh's 2014 retranslation, and finally today's still-growing **年轮**
+of readers' annotations.
+
+The component (`src/BookBio.tsx`) is book-agnostic — it renders whatever
+`BookBioData` (`src/books/types.ts`) it's given. Adding another themed book
+(a Western philosophy text, 源氏物语, or anything else) is a matter of writing
+a new `src/books/*.ts` data file and a route in `src/main.tsx`; no page code
+needs to change.
+
 ## Develop
 
 ```bash
@@ -44,6 +68,10 @@ npm run preview  # serve the production build
 | --- | --- |
 | `src/MyTree.tsx` | The 我的树 page component + its branch/annotation data |
 | `src/MyTree.css` | Page layout, the SVG tree, hover reveal, growth rings |
+| `src/BookBio.tsx` | The 一本书的传记 page — book-agnostic; renders a `BookBioData` |
+| `src/BookBio.css` | Its layout: hero, timeline, 经文在此改变 comparison, growth rings |
+| `src/books/types.ts` | The `BookBioData` shape a themed book plugs in |
+| `src/books/heartSutra.ts` | Content for 心经 (Heart Sutra) — the first themed book |
 | `src/theme.css` | Design tokens (墨字朱批 palette), day/night themes, keyframes |
 | `APP_NOTES.md` | Detailed notes on this page |
 | `design/` | The original Claude Design handoff bundle — chat transcript + all page prototypes. The source of truth for the pages not yet built. |
