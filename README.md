@@ -10,6 +10,13 @@ growing tree.
 
 ## 我的树 (My Tree)
 
+A reader may grow more than one tree — one per book. A switcher below the
+reader's name moves between them without leaving the page. Two are grown so
+far: **《道德经》** (老子, planted 2023) and **《源氏物语》** (紫式部, planted
+2024), each with its own planting date, chapters, and annotations. Adding a
+new themed book is a matter of adding one entry to `src/books.ts` — the page
+component itself carries no book-specific content.
+
 Each reader grows a tree:
 
 - **枝 (branches)** — chapters read, labelled with their number (十一, 八, 四十四…).
@@ -42,7 +49,8 @@ npm run preview  # serve the production build
 
 | Path | What |
 | --- | --- |
-| `src/MyTree.tsx` | The 我的树 page component + its branch/annotation data |
+| `src/MyTree.tsx` | The 我的树 page component (book-agnostic) |
+| `src/books.ts` | Per-book tree data — branches, annotations, echo. Add a book here. |
 | `src/MyTree.css` | Page layout, the SVG tree, hover reveal, growth rings |
 | `src/theme.css` | Design tokens (墨字朱批 palette), day/night themes, keyframes |
 | `APP_NOTES.md` | Detailed notes on this page |

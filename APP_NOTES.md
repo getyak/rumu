@@ -8,6 +8,15 @@ recreated pixel-for-pixel outside the proprietary `dc-runtime` format.
 
 ## What the page is
 
+A reader may grow more than one tree, one per book. Below the reader's name
+sits a quiet switcher — book title + a one-line attribution (author, era) —
+that swaps which tree is drawn, with no page navigation. Two books are grown
+so far: 《道德经》(老子) and 《源氏物语》(紫式部, 五十四帖 of it, five
+branches drawn). All book content — branches, leaf states, annotations, the
+周年回声 — lives in `src/books.ts` as a `Book` record; `MyTree.tsx` itself
+has no book-specific content, so adding a new themed book (a sutra, a
+philosophy text, another epic) means adding one entry there.
+
 Each reader grows an abstract tree:
 
 - **枝 (branches)** — chapters read, labelled with their number (十一, 八, 四十四…).
