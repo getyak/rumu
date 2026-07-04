@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 分享卡</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes stepIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <a href="老树 · 考据.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">考据</a>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+    </div>
+  </div>
+
+  <div data-screen-label="分享卡" style="max-width:720px; margin:0 auto; padding:48px 44px 120px 44px; box-sizing:content-box;">
+    <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light); margin-bottom:36px;">分享卡</div>
+
+    <div style="display:flex; justify-content:center; gap:40px; font-size:12.5px; letter-spacing:0.1em; margin-bottom:48px;">
+      <div style="display:flex; gap:16px;">
+        <span onClick="{{ setRing }}" style="cursor:pointer; padding-bottom:3px; color: {{ ringC }}; border-bottom:1px solid {{ ringB }}; transition: color .3s ease;">年轮卡</span>
+        <span onClick="{{ setFake }}" style="cursor:pointer; padding-bottom:3px; color: {{ fakeC }}; border-bottom:1px solid {{ fakeB }}; transition: color .3s ease;">伪托卡</span>
+      </div>
+      <div style="width:1px; background:var(--line);"></div>
+      <div style="display:flex; gap:16px;">
+        <span onClick="{{ setTall }}" style="cursor:pointer; padding-bottom:3px; color: {{ tallC }}; border-bottom:1px solid {{ tallB }}; transition: color .3s ease;">竖版 4:5</span>
+        <span onClick="{{ setSq }}" style="cursor:pointer; padding-bottom:3px; color: {{ sqC }}; border-bottom:1px solid {{ sqB }}; transition: color .3s ease;">方版 1:1</span>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center;">
+      <div style="width: {{ cardW }}; height: {{ cardH }}; background:#F7F4EC; border:0.5px solid rgba(31,29,26,0.18); box-shadow:0 18px 48px rgba(31,29,26,0.12); padding:44px 44px 36px 44px; box-sizing:border-box; display:flex; flex-direction:column; transition: width .35s ease, height .35s ease; color:#1F1D1A;">
+
+        <div style="display:flex; align-items:center; gap:9px;">
+          <svg width="16" height="16" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="#B03A2E" stroke-width="1.2"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="#B03A2E" stroke-width="1" opacity="0.65"></circle></svg>
+          <span style="font-family:'Noto Serif SC',serif; font-size:12px; letter-spacing:0.3em; color:#1F1D1A;">老树</span>
+        </div>
+
+        <sc-if value="{{ isRing }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-family:'Noto Serif SC',serif; font-size: {{ quoteFs }}; line-height:1.9; letter-spacing:0.06em; color:#1F1D1A;">三十辐,共一毂,<br>当其无,有车之用。</div>
+            <div style="margin-top:26px; font-family:'Noto Serif SC',serif; font-size:13.5px; line-height:2.05; color:#3D3A34;">这三年住的从来不是墙和柜子,是它们围出来的那块空。搬走那天,我才第一次读懂。</div>
+            <div style="margin-top:22px; font-size:12.5px; letter-spacing:0.06em; color:#B03A2E;">—— 沈一苇 · 证 · 二〇二三年十二月</div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isFake }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+            <div style="font-family:'Noto Serif SC',serif; font-size:14px; line-height:2; color:#8A8578;">「天欲其亡,必令其狂。」</div>
+            <div style="margin-top:24px; font-family:'Noto Serif SC',serif; font-size: {{ quoteFs }}; line-height:1.9; letter-spacing:0.06em; color:#1F1D1A;">此句不见于《道德經》。</div>
+            <div style="margin-top:22px; font-size:12px; line-height:2; color:#8A8578;">不见于任何传世本与出土本。最早可溯源至 20 世纪初的英文谚语,后被安上「老子曰」。</div>
+          </div>
+        </sc-if>
+
+        <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:0.5px solid rgba(31,29,26,0.14); padding-top:16px;">
+          <span style="font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:11px; letter-spacing:0.08em; color:#8A8578;">{{ footLine }}</span>
+          <span style="font-family:Spectral,serif; font-size:10.5px; letter-spacing:0.08em; color:#8A8578;">laoshu.app</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:40px; font-size:12px; color:var(--ink-light); letter-spacing:0.08em; line-height:2;">纸色、墨字、朱砂。没有二维码,角落只有极小的域名。<br><span style="color:var(--cinnabar); cursor:pointer; letter-spacing:0.12em;" title="原型:导出功能示意">导出图片 →</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  state = { kind: 'ring', shape: 'tall', night: false };
+
+  componentDidMount() {
+    if (this.props.night) document.body.setAttribute('data-night', '1');
+  }
+
+  renderVals() {
+    const st = this.state;
+    const on = 'var(--ink)', off = 'var(--ink-light)';
+    const onB = 'var(--cinnabar)', offB = 'transparent';
+    const tall = st.shape === 'tall';
+    return {
+      isRing: st.kind === 'ring', isFake: st.kind === 'fake',
+      ringC: st.kind === 'ring' ? on : off, ringB: st.kind === 'ring' ? onB : offB,
+      fakeC: st.kind === 'fake' ? on : off, fakeB: st.kind === 'fake' ? onB : offB,
+      tallC: tall ? on : off, tallB: tall ? onB : offB,
+      sqC: !tall ? on : off, sqB: !tall ? onB : offB,
+      setRing: () => this.setState({ kind: 'ring' }),
+      setFake: () => this.setState({ kind: 'fake' }),
+      setTall: () => this.setState({ shape: 'tall' }),
+      setSq: () => this.setState({ shape: 'sq' }),
+      cardW: tall ? '384px' : '440px',
+      cardH: tall ? '480px' : '440px',
+      quoteFs: tall ? '22px' : '21px',
+      footLine: st.kind === 'ring' ? '此句已生长 2,426 年' : '考据 · 老树',
+      nightLabel: st.night ? '昼读' : '夜读',
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

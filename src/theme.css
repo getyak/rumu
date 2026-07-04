@@ -1,0 +1,95 @@
+/*
+ * 老树 — design tokens & global styles
+ * Ported verbatim from the Claude Design prototype (老树 · 我的树.dc.html).
+ * Palette rationale ("墨字朱批"): ink for text, cinnabar for the human hand.
+ */
+
+:root {
+  /* 昼读 — daylight reading */
+  --paper: #f7f4ec; /* 暖白纸色 · near jade-plate xuan paper, never cold white */
+  --ink: #1f1d1a; /* 浓墨 · body & titles, never pure black */
+  --ink-light: #8a8578; /* 淡墨 · AI base layer + secondary info */
+  --cinnabar: #b03a2e; /* 朱砂 · the human hand — sole accent */
+  --seal: #7a241b; /* 印泥深朱 · cinnabar pressed / dark */
+  --verdigris: #5e7a6b; /* 青绿 · "青芽" sprout state only */
+  --line: rgba(31, 29, 26, 0.14);
+  --u-soft: rgba(176, 58, 46, 0.32);
+}
+
+body[data-night='1'] {
+  /* 夜读 — "reading by lamplight", not an inversion: darker, stiller, softer contrast */
+  --paper: #15161a;
+  --ink: #e8e3d6;
+  --ink-light: #7e7a6e;
+  --cinnabar: #c9564a;
+  --seal: #d8776c;
+  --line: rgba(232, 227, 214, 0.13);
+  --u-soft: rgba(201, 86, 74, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  transition: background-color 0.5s ease;
+}
+
+::selection {
+  background: rgba(176, 58, 46, 0.18);
+}
+
+/* Three sanctioned motions live here; growth is the vocabulary of this page. */
+@keyframes growY {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes growX {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes stepIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
