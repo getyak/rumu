@@ -1,0 +1,251 @@
+.genji-page {
+  min-height: 100vh;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink);
+}
+
+.genji-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 88px 44px 96px 44px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.genji-hero-quote {
+  position: absolute;
+  right: 44px;
+  top: 80px;
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif JP', 'Noto Serif SC', serif;
+  font-size: 15px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  opacity: 0.55;
+  line-height: 2;
+}
+
+.genji-shelf {
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.3em;
+  margin-bottom: 32px;
+}
+
+.genji-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+}
+
+.genji-meta {
+  margin-top: 20px;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+}
+
+.genji-lead {
+  margin-top: 40px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 21px;
+  letter-spacing: 0.05em;
+}
+
+.genji-cta {
+  margin-top: 36px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+
+.genji-timeline {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 44px 60px 44px;
+  box-sizing: border-box;
+}
+
+.genji-timeline-label {
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  margin-bottom: 56px;
+}
+
+.genji-nodes {
+  position: relative;
+  padding-left: 140px;
+}
+.genji-nodes::before {
+  content: '';
+  position: absolute;
+  left: 120px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+}
+
+.genji-node {
+  position: relative;
+  margin-bottom: 76px;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.genji-node-year {
+  position: absolute;
+  left: -140px;
+  top: 3px;
+  width: 106px;
+  text-align: right;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.genji-node-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.genji-node-who {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.genji-node-story {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14.5px;
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.genji-node-anchor {
+  margin-top: 16px;
+  font-family: 'Noto Serif JP', 'Noto Serif SC', serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+  border-left: 2px solid var(--u-soft);
+  padding-left: 14px;
+}
+
+.genji-special {
+  margin-top: 20px;
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.genji-special-label {
+  font-size: 11.5px;
+  letter-spacing: 0.24em;
+  color: var(--cinnabar);
+  margin-bottom: 16px;
+}
+
+.genji-special-body {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.genji-rings {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.genji-ring {
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.genji-ring-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.genji-ring-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.genji-ring-badge {
+  font-size: 11px;
+  border: 0.5px solid;
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.5;
+}
+
+.genji-ring-tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.genji-ring-date {
+  font-family: Spectral, serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-left: auto;
+}
+
+.genji-ring-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.genji-foot {
+  text-align: center;
+  padding: 0 44px 96px 44px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+}
+
+@media (max-width: 640px) {
+  .genji-hero,
+  .genji-timeline {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .genji-hero-quote {
+    display: none;
+  }
+  .genji-title {
+    font-size: 38px;
+  }
+  .genji-nodes {
+    padding-left: 96px;
+  }
+  .genji-nodes::before {
+    left: 80px;
+  }
+  .genji-node-year {
+    left: -96px;
+    width: 68px;
+    font-size: 11px;
+  }
+}

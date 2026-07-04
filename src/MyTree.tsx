@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { Link } from './router'
 import './MyTree.css'
 
 /**
@@ -178,6 +179,9 @@ export default function MyTree() {
           <span className="brand-name">老树</span>
         </a>
         <nav className="nav">
+          <Link className="link-muted" to="/books">
+            千年书架
+          </Link>
           <a className="link-muted" href="/read">
             回到阅读
           </a>
