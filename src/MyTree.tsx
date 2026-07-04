@@ -178,7 +178,7 @@ export default function MyTree() {
           <span className="brand-name">老树</span>
         </a>
         <nav className="nav">
-          <a className="link-muted" href="/read">
+          <a className="link-muted" href="/book/daodejing/read">
             回到阅读
           </a>
           <span
@@ -302,7 +302,7 @@ export default function MyTree() {
           <div className="echo-quote">辞掉第二份工作的那晚我写:知道停在哪里,比知道去哪里难。</div>
           <div className="echo-ask">现在的你,还这么读吗?</div>
           <div className="echo-actions">
-            <a className="link-cinnabar" href="/read">
+            <a className="link-cinnabar" href="/book/daodejing/read">
               回去看看 →
             </a>
             <a className="link-muted" href="/inscribe">

@@ -48,6 +48,26 @@ body {
   background: rgba(176, 58, 46, 0.18);
 }
 
+/* Quiet links that warm to full ink on hover — shared across every page. */
+.link-muted {
+  color: var(--ink-light);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.link-muted:hover {
+  color: var(--ink);
+}
+
+.link-cinnabar {
+  color: var(--cinnabar);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+.link-cinnabar:hover {
+  color: var(--seal);
+}
+
 /* Three sanctioned motions live here; growth is the vocabulary of this page. */
 @keyframes growY {
   from {
