@@ -4,9 +4,22 @@
 
 不是读书 App,不是笔记工具,不是 AI 聊天产品 —— 更接近一座**可以走进去的、还在生长的碑林**。
 
-This repository holds the 老树 product front-end. The first page implemented is
+This repository holds the 老树 product front-end. The pages implemented so far are
+**首页书架 (Bookshelf)** — a timeline of every planted book — and, per book,
 **我的树 (My Tree)** — a reader's personal archive, rendered as an abstract, slowly
 growing tree.
+
+## 首页书架 (Bookshelf)
+
+The home page (`/`) lays every book on a timeline by the age of its text, not a
+grid. Two books are planted (live) and walkable:
+
+- **《道德经》** (Taoism, ~5th century BCE)
+- **《心经》** (Buddhism, the Heart Sutra, Xuanzang's 7th-century translation)
+
+论语 and 庄子 sit on the same timeline as **即将种下** (soon to be planted)
+placeholders — ghosts of a growing library, not yet clickable. Hovering any plank
+shows a teaser card; clicking a live one walks into that book's 我的树.
 
 ## 我的树 (My Tree)
 
@@ -42,15 +55,29 @@ npm run preview  # serve the production build
 
 | Path | What |
 | --- | --- |
-| `src/MyTree.tsx` | The 我的树 page component + its branch/annotation data |
+| `src/Bookshelf.tsx` | The 首页书架 (`/`) timeline page |
+| `src/Bookshelf.css` | Its layout, timeline ticks, plank hover cards |
+| `src/MyTree.tsx` | The 我的树 (`/tree/:bookId`) page — generic, driven by a `Book` |
 | `src/MyTree.css` | Page layout, the SVG tree, hover reveal, growth rings |
+| `src/books/types.ts` | Shared `Book` / `Branch` / `ShelfEntry` data model |
+| `src/books/daodejing.ts` | 《道德经》's branches, annotations, shelf entry |
+| `src/books/xinjing.ts` | 《心经》's branches, annotations, shelf entry |
+| `src/books/index.ts` | Book registry (`BOOKS`, `PLACEHOLDER_BOOKS`, `getBook`) |
 | `src/theme.css` | Design tokens (墨字朱批 palette), day/night themes, keyframes |
-| `APP_NOTES.md` | Detailed notes on this page |
+| `APP_NOTES.md` | Detailed notes on these pages |
 | `design/` | The original Claude Design handoff bundle — chat transcript + all page prototypes. The source of truth for the pages not yet built. |
+
+## Adding a book
+
+A book is just an entry in `src/books/`: a `Book` (title, reader, planted date,
+branches with their annotations, the anniversary echo, and a shelf entry for the
+timeline) registered in `src/books/index.ts`. A book without a real tree yet can
+be added to `PLACEHOLDER_BOOKS` instead — it shows on the shelf as **即将种下**
+and isn't clickable until it has real branch data.
 
 ## Not yet built
 
-`design/project/` holds prototypes for the rest of the product: 首页书架, 书籍详情页,
+`design/project/` holds prototypes for the rest of the product: 书籍详情页,
 阅读页 (the design's stated priority — its "signature" screen with the time-slider),
 落笔流程, 句子房间, 考据, 分享卡, 守树人. `我的树` links out to `/read` and `/inscribe`
 as placeholders for those routes.
