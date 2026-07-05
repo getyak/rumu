@@ -1,0 +1,299 @@
+/* 书籍详情页 — a book's own biography, node by node down a thin spine. */
+
+.detail-page {
+  min-height: 100vh;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink);
+}
+
+.detail-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 64px 44px 96px 44px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.detail-margin-quote {
+  position: absolute;
+  right: 44px;
+  top: 56px;
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  opacity: 0.55;
+  line-height: 2;
+}
+
+.detail-category {
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.3em;
+  margin-bottom: 32px;
+}
+
+.detail-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+}
+
+.detail-composed {
+  margin-top: 20px;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+  max-width: 560px;
+}
+
+.detail-tagline {
+  margin-top: 40px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 21px;
+  letter-spacing: 0.05em;
+}
+
+.detail-entry {
+  margin-top: 36px;
+}
+
+.detail-timeline {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 44px 60px 44px;
+  box-sizing: border-box;
+}
+
+.detail-timeline-label {
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  margin-bottom: 56px;
+}
+
+.detail-nodes {
+  position: relative;
+  padding-left: 140px;
+}
+
+.detail-spine {
+  position: absolute;
+  left: 120px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+}
+
+.detail-node {
+  position: relative;
+  margin-bottom: 76px;
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.detail-node-year {
+  position: absolute;
+  left: -140px;
+  top: 3px;
+  width: 106px;
+  text-align: right;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.detail-node-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.detail-node-who {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.detail-node-story {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14.5px;
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.detail-node-anchor {
+  margin-top: 16px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+  border-left: 2px solid var(--u-soft);
+  padding-left: 14px;
+}
+
+.detail-special {
+  margin-top: 20px;
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.detail-special-heading {
+  font-size: 11.5px;
+  letter-spacing: 0.24em;
+  color: var(--cinnabar);
+  margin-bottom: 16px;
+}
+
+.detail-special-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+.detail-special-col-label {
+  font-size: 11px;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink-light);
+  letter-spacing: 0.1em;
+}
+
+.detail-special-link {
+  margin-top: 16px;
+  font-size: 12px;
+}
+
+.detail-rings {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-ring {
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.detail-ring-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.detail-ring-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.detail-ring-badge {
+  font-size: 11px;
+  border: 0.5px solid;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.detail-ring-tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.detail-ring-date {
+  font-family: Spectral, serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-left: auto;
+}
+
+.detail-ring-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.detail-ask-off {
+  margin-top: 14px;
+  text-align: right;
+}
+.detail-ask-off .link-muted {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.detail-ask-off .link-muted:hover {
+  color: var(--cinnabar);
+}
+
+.detail-ask-open {
+  margin-top: 14px;
+  text-align: right;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12.5px;
+  color: var(--ink-light);
+}
+
+.detail-ask-cta {
+  color: var(--cinnabar);
+  cursor: pointer;
+}
+
+.detail-foot {
+  text-align: center;
+  padding: 0 44px 96px 44px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+}
+
+@media (max-width: 640px) {
+  .detail-hero,
+  .detail-timeline {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .detail-margin-quote {
+    display: none;
+  }
+  .detail-title {
+    font-size: 42px;
+  }
+  .detail-nodes {
+    padding-left: 96px;
+  }
+  .detail-spine {
+    left: 76px;
+  }
+  .detail-node-year {
+    left: -96px;
+    width: 62px;
+    font-size: 11.5px;
+  }
+  .detail-node-dot {
+    left: -14px;
+  }
+  .detail-special-grid {
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+  .detail-special-col-label:nth-child(2) {
+    margin-top: 8px;
+  }
+}
