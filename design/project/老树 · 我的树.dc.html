@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 我的树 · 沈一苇</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes growY { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+    @keyframes growX { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes stepIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <a href="老树 · 阅读页.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">回到阅读</a>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+    </div>
+  </div>
+
+  <div data-screen-label="我的树" style="max-width:640px; margin:0 auto; padding:56px 44px 120px 44px; box-sizing:content-box;">
+    <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light);">我的树</div>
+    <div style="text-align:center; font-family:'Noto Serif SC',serif; font-size:22px; letter-spacing:0.12em; margin-top:18px;">沈一苇</div>
+    <div style="text-align:center; font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:12px; color:var(--ink-light); margin-top:10px; letter-spacing:0.08em;">种于 2023 年冬</div>
+
+    <div style="position:relative; width:440px; height:340px; margin:56px auto 0 auto; max-width:100%;">
+      <div style="position:absolute; bottom:36px; left:50%; width:140px; margin-left:-70px; height:1px; background:var(--line);"></div>
+      <div style="position:absolute; bottom:36px; left:50%; width:1.5px; height:216px; background:var(--ink); opacity:0.8; transform-origin:bottom; animation: growY 0.9s ease-out both;"></div>
+      <sc-for list="{{ branches }}" as="b" hint-placeholder-count="5">
+        <div style="position:absolute; bottom: {{ b.bot }}; left:50%; width: {{ b.len }}; height:1.2px; transform-origin:left center; transform: rotate({{ b.deg }});">
+          <div style="width:100%; height:100%; background:var(--ink); opacity:0.7; transform-origin:left center; animation: growX 0.7s ease-out both; animation-delay: {{ b.delay }};"></div>
+          <sc-if value="{{ b.leaf }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute; right:-6px; top:-4px; width:9px; height:9px; border-radius:50%; background: {{ b.leaf }}; animation: fadeIn 0.6s ease-out both; animation-delay: {{ b.leafDelay }};"></div>
+          </sc-if>
+          <div style="position:absolute; right:-10px; top:9px; transform: rotate({{ b.neg }}); font-family:Spectral,'Noto Sans SC',serif; font-size:11px; color:var(--ink-light); white-space:nowrap; animation: fadeIn 0.6s ease-out both; animation-delay: {{ b.leafDelay }};">{{ b.label }}</div>
+          <sc-if value="{{ b.thread }}" hint-placeholder-val="{{ false }}">
+            <div style="position:absolute; left:100%; top:0; width:46px; height:1px; border-top:1px dashed var(--verdigris); transform-origin:left center; transform: rotate(-30deg); animation: fadeIn 0.8s ease-out both; animation-delay: 2.4s;">
+              <span style="position:absolute; left:50px; top:-7px; transform: rotate(50deg); transform-origin:left center; font-size:10.5px; color:var(--verdigris); white-space:nowrap;">陈拾 · 3 年后接续</span>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="text-align:center; margin-top:48px; font-size:12px; color:var(--ink-light); letter-spacing:0.1em; line-height:2.2;">枝,是读过的章。叶,是留下的年轮。<br>朱砂叶已入木,与古人同列。细线,是有人接续了你。</div>
+
+    <div style="margin-top:96px; border-top:0.5px solid var(--line); padding-top:48px; animation: stepIn 0.8s ease-out both; animation-delay: 0.6s;">
+      <div style="font-size:12px; letter-spacing:0.4em; color:var(--ink-light); margin-bottom:28px;">周年回声</div>
+      <div style="font-family:'Noto Serif SC',serif; font-size:16px; line-height:2.1; color:var(--ink);">一年前的你,在「知足不辱,知止不殆」之下写过一枚青芽。</div>
+      <div style="margin-top:18px; font-family:'Noto Serif SC',serif; font-size:14px; line-height:2.05; color:var(--ink-light); border-left:2px solid var(--u-soft); padding-left:14px;">辞掉第二份工作的那晚我写:知道停在哪里,比知道去哪里难。</div>
+      <div style="margin-top:24px; font-family:'Noto Serif SC',serif; font-size:15px; color:var(--ink);">现在的你,还这么读吗?</div>
+      <div style="display:flex; gap:32px; margin-top:28px; font-size:13px; letter-spacing:0.1em;">
+        <a href="老树 · 阅读页.dc.html" style="color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">回去看看 →</a>
+        <a href="老树 · 落笔流程.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">接续一年前的自己 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  state = { night: false };
+
+  branchData = [
+    { bot: '60px',  deg: '-20deg',  neg: '20deg',  len: '132px', label: '十一',   leaf: 'var(--cinnabar)',  delay: '0.9s',  leafDelay: '1.5s', thread: true },
+    { bot: '100px', deg: '-162deg', neg: '162deg', len: '112px', label: '八',     leaf: '',                 delay: '1.15s', leafDelay: '1.7s' },
+    { bot: '136px', deg: '-26deg',  neg: '26deg',  len: '98px',  label: '四十四', leaf: 'var(--verdigris)', delay: '1.4s',  leafDelay: '2.0s' },
+    { bot: '168px', deg: '-156deg', neg: '156deg', len: '78px',  label: '二十二', leaf: '',                 delay: '1.65s', leafDelay: '2.2s' },
+    { bot: '196px', deg: '-24deg',  neg: '24deg',  len: '58px',  label: '六十四', leaf: '',                 delay: '1.9s',  leafDelay: '2.4s' }
+  ];
+
+  componentDidMount() {
+    if (this.props.night) document.body.setAttribute('data-night', '1');
+  }
+
+  renderVals() {
+    const st = this.state;
+    return {
+      branches: this.branchData,
+      nightLabel: st.night ? '昼读' : '夜读',
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

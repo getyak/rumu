@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 落笔 · 道德經 第十一章</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes stepIn { from { opacity:0; transform: translateY(14px); } to { opacity:1; transform:none; } }
+    @keyframes blinkB { 0%,55% { border-bottom-color: var(--cinnabar); } 56%,100% { border-bottom-color: transparent; } }
+    @keyframes shakeC { 0%,100% { transform: translateX(0); } 30% { transform: translateX(-2px); } 60% { transform: translateX(2px); } }
+    @keyframes sproutIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+    textarea::placeholder { color: var(--ink-light); opacity: .7; }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+    </a>
+    <div style="display:flex; gap:16px; font-size:12px; letter-spacing:0.1em; align-items:center;">
+      <span style="color: {{ st1c }};">抄经</span><span style="color:var(--line);">——</span>
+      <span style="color: {{ st2c }};">选体</span><span style="color:var(--line);">——</span>
+      <span style="color: {{ st3c }};">书写</span><span style="color:var(--line);">——</span>
+      <span style="color: {{ st4c }};">守门人</span>
+    </div>
+    <a href="老树 · 阅读页.dc.html" style="font-size:13px; color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">退出</a>
+  </div>
+
+  <div style="max-width:640px; margin:0 auto; padding:64px 44px 120px 44px; box-sizing:content-box;">
+
+    <sc-if value="{{ step1 }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="落笔 · 一 · 抄经" onClick="{{ focusCopy }}" style="animation: stepIn .5s ease-out both; cursor:text;">
+        <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light); margin-bottom:16px;">一 · 抄经</div>
+        <div style="text-align:center; font-size:13px; color:var(--ink-light); margin-bottom:56px; letter-spacing:0.05em;">逐字抄录本章。墨迹会随你的键入显影,标点会自行落下。</div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:21px; line-height:2.5; letter-spacing:0.06em; text-align:center;">
+          <sc-for list="{{ lines }}" as="ln" hint-placeholder-count="4">
+            <div style="margin-bottom:6px;">
+              <sc-for list="{{ ln.chars }}" as="c" hint-placeholder-count="10">
+                <span style="display:inline-block; color: {{ c.col }}; opacity: {{ c.op }}; border-bottom:1.5px solid {{ c.bc }}; animation: {{ c.anim }}; transition: color .35s ease, opacity .35s ease; min-width:0.5em;">{{ c.ch }}</span>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+        <input ref="{{ copyRef }}" onInput="{{ onType }}" onCompositionStart="{{ compOn }}" onCompositionEnd="{{ compOff }}" aria-label="抄经输入" style="position:absolute; opacity:0; width:1px; height:1px; border:none; padding:0;">
+        <div style="text-align:center; margin-top:64px; font-size:13px; min-height:24px;">
+          <sc-if value="{{ copying }}" hint-placeholder-val="{{ true }}">
+            <span style="color:var(--ink-light); letter-spacing:0.05em;">点击任意处,开始键入 <span onClick="{{ autoCopy }}" style="margin-left:24px; font-size:11px; opacity:0.6; cursor:pointer; letter-spacing:0.1em;" style-hover="opacity: 1">原型演示:自动抄写</span></span>
+          </sc-if>
+          <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:'Noto Serif SC',serif; color:var(--ink); letter-spacing:0.05em;">你已读过。可以落笔了。 <span onClick="{{ toStep2 }}" style="color:var(--cinnabar); cursor:pointer; letter-spacing:0.14em; margin-left:12px;" style-hover="color: var(--seal)">继续 →</span></span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step2 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="落笔 · 二 · 锚定与选体" style="animation: stepIn .5s ease-out both;">
+        <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light); margin-bottom:16px;">二 · 锚定与选体</div>
+        <div style="text-align:center; font-size:13px; color:var(--ink-light); margin-bottom:56px; letter-spacing:0.05em;">先选中你要批注的句子,再选一种体。</div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:19px; line-height:2.4; letter-spacing:0.05em; text-align:center;">
+          <sc-for list="{{ anchorLines }}" as="a" hint-placeholder-count="4">
+            <div style="margin-bottom:8px;">
+              <span onClick="{{ a.pick }}" style="cursor:pointer; padding:2px 6px; color: {{ a.col }}; background: {{ a.bg }}; transition: background-color .3s ease, color .3s ease;" style-hover="color: var(--cinnabar)">{{ a.text }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:64px;">
+          <sc-for list="{{ genres }}" as="g" hint-placeholder-count="4">
+            <div onClick="{{ g.pick }}" style="border:0.5px solid {{ g.bd }}; border-radius:8px; padding:18px 20px; cursor:pointer; display:flex; align-items:baseline; gap:14px; transition: border-color .3s ease;" style-hover="border-color: var(--cinnabar)">
+              <span style="font-family:'Noto Serif SC',serif; font-size:22px; color: {{ g.cc }};">{{ g.ch }}</span>
+              <span style="font-size:12.5px; color:var(--ink-light); letter-spacing:0.04em;">{{ g.desc }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <sc-if value="{{ needTarget }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:32px; animation: stepIn .4s ease-out both;">
+            <div style="font-size:12px; color:var(--ink-light); letter-spacing:0.1em; margin-bottom:14px;">驳,需指定一条年轮:</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <sc-for list="{{ targets }}" as="t" hint-placeholder-count="3">
+                <div onClick="{{ t.pick }}" style="display:flex; align-items:baseline; gap:12px; padding:10px 14px; border:0.5px solid {{ t.bd }}; border-radius:8px; cursor:pointer; transition: border-color .3s ease;" style-hover="border-color: var(--cinnabar)">
+                  <span style="font-size:13px; font-weight:500; color: {{ t.cc }};">{{ t.name }}</span>
+                  <span style="font-family:Spectral,serif; font-feature-settings:'onum'; font-size:12px; color:var(--ink-light);">{{ t.yl }}</span>
+                  <span style="font-family:'Noto Serif SC',serif; font-size:12.5px; color:var(--ink-light); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ t.ex }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <div style="text-align:center; margin-top:56px; min-height:24px; font-size:13px;">
+          <sc-if value="{{ step2ok }}" hint-placeholder-val="{{ false }}">
+            <span onClick="{{ toStep3 }}" style="color:var(--cinnabar); cursor:pointer; letter-spacing:0.14em;" style-hover="color: var(--seal)">继续 →</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step3 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="落笔 · 三 · 书写" style="animation: stepIn .5s ease-out both;">
+        <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light); margin-bottom:56px;">三 · 书写</div>
+        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:14px;">
+          <span style="font-size:11px; color:var(--cinnabar); border:0.5px solid var(--cinnabar); border-radius:4px; padding:1px 6px;">{{ genreCh }}</span>
+          <sc-if value="{{ targetName }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:12px; color:var(--ink-light);">驳 {{ targetName }}</span>
+          </sc-if>
+        </div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:16px; line-height:1.9; border-left:2px solid var(--cinnabar); padding-left:14px; margin-bottom:36px;">{{ anchorText }}</div>
+        <textarea ref="{{ writeRef }}" onInput="{{ onWrite }}" placeholder="写你自己的东西。" style="width:100%; box-sizing:border-box; min-height:220px; background:transparent; border:0.5px solid var(--line); border-radius:8px; padding:20px 22px; font-family:'Noto Serif SC',serif; font-size:15.5px; line-height:2.05; letter-spacing:0.02em; color:var(--ink); outline:none; resize:vertical;"></textarea>
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:14px;">
+          <span style="font-size:11.5px; color:var(--ink-light); letter-spacing:0.06em;">只允许纯文本与换行。</span>
+          <sc-if value="{{ writeOk }}" hint-placeholder-val="{{ false }}">
+            <span onClick="{{ toStep4 }}" style="font-size:13px; color:var(--cinnabar); cursor:pointer; letter-spacing:0.14em;" style-hover="color: var(--seal)">落笔 →</span>
+          </sc-if>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ step4 }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="落笔 · 四 · 守门人" style="animation: stepIn .5s ease-out both;">
+        <div style="text-align:center; font-size:12px; letter-spacing:0.5em; padding-left:0.5em; color:var(--ink-light); margin-bottom:56px;">四 · 守门人</div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:16px; line-height:1.9; border-left:2px solid var(--cinnabar); padding-left:14px; margin-bottom:28px; color:var(--ink);">{{ anchorText }}</div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2.05; color:var(--ink); white-space:pre-wrap; margin-bottom:48px;">{{ draft }}</div>
+        <sc-if value="{{ asking }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative; border-top:0.5px solid var(--line); padding-top:28px;">
+            <div style="position:absolute; top:28px; right:0; font-size:10.5px; color:var(--ink-light); letter-spacing:0.12em; border:0.5px solid var(--line); border-radius:4px; padding:2px 7px;">守门人 · 只问一次</div>
+            <div style="font-family:'Noto Serif SC',serif; font-size:15px; line-height:2.05; color:var(--ink-light); max-width:480px;">{{ gateQ }}</div>
+            <div style="display:flex; gap:36px; margin-top:36px; font-size:13px; letter-spacing:0.1em;">
+              <span onClick="{{ backToWrite }}" style="color:var(--ink-light); cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">回去修改</span>
+              <span onClick="{{ submit }}" style="color:var(--cinnabar); cursor:pointer;" style-hover="color: var(--seal)">坚持提交 →</span>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+          <div style="animation: sproutIn .8s ease-out both;">
+            <div style="border:0.5px solid var(--line); border-radius:8px; padding:22px 24px;">
+              <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:10px;">
+                <span style="font-size:13px; font-weight:500; color:var(--verdigris);">你</span>
+                <span style="font-size:11px; color:var(--verdigris); border:0.5px solid var(--verdigris); border-radius:4px; padding:1px 6px;">{{ genreCh }}</span>
+                <span style="font-size:11px; letter-spacing:0.1em; color:var(--verdigris);">青芽</span>
+                <span style="font-family:Spectral,serif; font-feature-settings:'onum'; font-size:12px; color:var(--ink-light); margin-left:auto;">2026 年 7 月</span>
+              </div>
+              <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2.05; color:var(--ink); white-space:pre-wrap;">{{ draft }}</div>
+            </div>
+            <div style="text-align:center; margin-top:48px; font-family:'Noto Serif SC',serif; font-size:14px; color:var(--ink-light); line-height:2;">青芽已生。它此刻与王弼同列一柱。<br>时间与同侪,会决定它是否入木。</div>
+            <div style="text-align:center; margin-top:32px; display:flex; justify-content:center; gap:36px;">
+              <a href="老树 · 阅读页.dc.html" style="font-size:13px; letter-spacing:0.14em; color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">回到句子房间 →</a>
+              <a href="老树 · 我的树.dc.html" style="font-size:13px; letter-spacing:0.14em; color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">去看你的树 →</a>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  lines = ['三十辐,共一毂,当其无,有车之用。', '埏埴以为器,当其无,有器之用。', '凿户牖以为室,当其无,有室之用。', '故有之以为利,无之以为用。'];
+  puncts = ',。;、';
+
+  genreDefs = [
+    { ch: '注', desc: '我如何解这一句' },
+    { ch: '疑', desc: '我还不懂什么' },
+    { ch: '证', desc: '生命印证或推翻了它' },
+    { ch: '驳', desc: '我不同意某条年轮' }
+  ];
+
+  targetDefs = [
+    { name: '王弼《老子注》', yl: '240', ex: '毂所以能统三十辐者,无也。' },
+    { name: 'Arthur Waley', yl: '1934', ex: 'the space where there is nothing' },
+    { name: '沈一苇', yl: '2023', ex: '搬走那天,我才第一次读懂。' }
+  ];
+
+  gateQs = {
+    '注': '王弼在此已有近似之解——你的解,与他不同在哪里?',
+    '疑': '把疑问再收窄一点:你不懂的,是「无」,还是「用」?',
+    '证': '细节让印证可信:那一天、那个房间、那件物,都在了吗?',
+    '驳': '你驳的是他的论证,还是他的结论?指明一处,驳才立得住。'
+  };
+
+  state = {
+    step: 1, pos: 0, errOn: false,
+    anchor: null, genre: null, target: null,
+    draft: '', done: false
+  };
+
+  copyRef = React.createRef();
+  writeRef = React.createRef();
+
+  componentDidMount() {
+    this.flat = this.lines.join('');
+    if (this.props.night) document.body.setAttribute('data-night', '1');
+    setTimeout(() => { if (this.copyRef.current) this.copyRef.current.focus(); }, 300);
+  }
+  componentWillUnmount() { clearInterval(this._auto); clearTimeout(this._errT); }
+
+  isPunct(ch) { return this.puncts.indexOf(ch) >= 0; }
+
+  skipPuncts(p) {
+    while (p < this.flat.length && this.isPunct(this.flat[p])) p++;
+    return p;
+  }
+
+  feed(str) {
+    let pos = this.skipPuncts(this.state.pos);
+    let err = false;
+    for (const ch of str) {
+      if (pos >= this.flat.length) break;
+      if (/\s/.test(ch)) continue;
+      if (ch === this.flat[pos]) { pos = this.skipPuncts(pos + 1); }
+      else { err = true; }
+    }
+    this.setState({ pos, errOn: err });
+    if (err) { clearTimeout(this._errT); this._errT = setTimeout(() => this.setState({ errOn: false }), 300); }
+  }
+
+  onType = (e) => {
+    if (this._composing) return;
+    const v = e.target.value;
+    e.target.value = '';
+    if (v) this.feed(v);
+  };
+
+  autoCopy = () => {
+    clearInterval(this._auto);
+    this._auto = setInterval(() => {
+      const p = this.skipPuncts(this.state.pos);
+      if (p >= this.flat.length) { clearInterval(this._auto); this.setState({ pos: p }); return; }
+      this.setState({ pos: this.skipPuncts(p + 1) });
+    }, 55);
+  };
+
+  renderVals() {
+    const st = this.state;
+    this.flat = this.flat || this.lines.join('');
+    const donePos = this.skipPuncts(st.pos);
+    const total = this.flat.length;
+    const finished = donePos >= total;
+
+    let idx = 0;
+    const lines = this.lines.map(txt => ({
+      chars: Array.from(txt).map(ch => {
+        const i = idx++;
+        const isDone = i < donePos;
+        const isNext = i === donePos;
+        return {
+          ch,
+          col: isDone ? 'var(--ink)' : 'var(--ink-light)',
+          op: isDone ? 1 : (isNext ? 0.9 : 0.4),
+          bc: 'transparent',
+          anim: isNext ? (st.errOn ? 'shakeC .25s ease, blinkB 1.1s step-end infinite' : 'blinkB 1.1s step-end infinite') : 'none'
+        };
+      })
+    }));
+    lines.forEach(l => l.chars.forEach(c => { if (c.anim !== 'none') c.bc = 'var(--cinnabar)'; }));
+
+    const anchorLines = this.lines.map((t, i) => ({
+      text: t,
+      col: st.anchor === i ? 'var(--cinnabar)' : 'var(--ink)',
+      bg: st.anchor === i ? 'rgba(176,58,46,0.07)' : 'transparent',
+      pick: () => this.setState({ anchor: i })
+    }));
+
+    const genres = this.genreDefs.map(g => ({
+      ...g,
+      bd: st.genre === g.ch ? 'var(--cinnabar)' : 'var(--line)',
+      cc: st.genre === g.ch ? 'var(--cinnabar)' : 'var(--ink)',
+      pick: () => this.setState({ genre: g.ch, target: null })
+    }));
+
+    const targets = this.targetDefs.map(t => ({
+      ...t,
+      bd: st.target === t.name ? 'var(--cinnabar)' : 'var(--line)',
+      cc: st.target === t.name ? 'var(--cinnabar)' : 'var(--ink)',
+      pick: () => this.setState({ target: t.name })
+    }));
+
+    const needTarget = st.genre === '驳';
+    const step2ok = st.anchor != null && st.genre != null && (!needTarget || st.target != null);
+    const stepC = (n) => st.step === n ? 'var(--cinnabar)' : (st.step > n ? 'var(--ink)' : 'var(--ink-light)');
+
+    return {
+      step1: st.step === 1, step2: st.step === 2, step3: st.step === 3, step4: st.step === 4,
+      st1c: stepC(1), st2c: stepC(2), st3c: stepC(3), st4c: stepC(4),
+      lines, copying: !finished, copied: finished,
+      copyRef: this.copyRef, writeRef: this.writeRef,
+      onType: this.onType, autoCopy: this.autoCopy,
+      compOn: () => { this._composing = true; },
+      compOff: (e) => { this._composing = false; const v = e.target.value; e.target.value = ''; if (v) this.feed(v); },
+      focusCopy: () => { if (this.copyRef.current) this.copyRef.current.focus(); },
+      toStep2: () => this.setState({ step: 2 }),
+      anchorLines, genres, targets, needTarget, step2ok,
+      toStep3: () => { this.setState({ step: 3 }); setTimeout(() => { if (this.writeRef.current) this.writeRef.current.focus(); }, 350); },
+      genreCh: st.genre || '', targetName: st.target || '',
+      anchorText: st.anchor != null ? this.lines[st.anchor] : '',
+      onWrite: (e) => this.setState({ draft: e.target.value }),
+      writeOk: st.draft.trim().length > 0,
+      draft: st.draft,
+      toStep4: () => this.setState({ step: 4, done: false }),
+      gateQ: this.gateQs[st.genre] || this.gateQs['注'],
+      asking: !st.done, done: st.done,
+      backToWrite: () => this.setState({ step: 3 }),
+      submit: () => this.setState({ done: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

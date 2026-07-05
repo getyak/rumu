@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 守树人 · 道德經</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes stepIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform:none; } }
+    input::placeholder { color: var(--ink-light); opacity: .6; }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink); display:flex; flex-direction:column;">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+      <span style="font-size:12px; color:var(--ink-light); letter-spacing:0.1em; margin-left:4px;">道德經 · 守树人</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <a href="老树 · 阅读页.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">回到阅读</a>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+    </div>
+  </div>
+
+  <div style="text-align:center; font-size:11px; letter-spacing:0.2em; color:var(--ink-light); opacity:0.8;">守树人只引路,不作答。</div>
+
+  <div data-screen-label="守树人" style="max-width:600px; width:100%; margin:0 auto; padding:56px 44px 40px 44px; box-sizing:border-box; flex:1;">
+
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ true }}">
+      <div style="text-align:center; padding-top:96px; animation: stepIn .6s ease-out both;">
+        <div style="font-family:'Noto Serif SC',serif; font-size:24px; letter-spacing:0.1em; color:var(--ink);">带着一个真实的问题来。</div>
+        <div style="margin-top:14px; font-size:13px; color:var(--ink-light); letter-spacing:0.05em;">守树人不会安慰你。它只知道这本书里,谁在哪里写过什么。</div>
+        <div style="margin-top:64px; display:flex; flex-direction:column; gap:18px; align-items:center;">
+          <sc-for list="{{ examples }}" as="ex" hint-placeholder-count="3">
+            <span onClick="{{ ex.go }}" style="font-family:'Noto Serif SC',serif; font-size:15px; color:var(--ink-light); border-bottom:1px solid var(--line); padding-bottom:3px; cursor:pointer; transition: color .3s ease, border-color .3s ease;" style-hover="color: var(--ink); border-bottom-color: var(--u-soft)">{{ ex.t }}</span>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-for list="{{ turns }}" as="turn" hint-placeholder-count="1">
+      <div style="margin-bottom:64px;">
+        <div style="text-align:right; font-family:'Noto Serif SC',serif; font-size:16px; line-height:2; color:var(--ink); margin-bottom:36px;">{{ turn.q }}</div>
+        <sc-for list="{{ turn.items }}" as="it" hint-placeholder-count="3">
+          <div style="opacity: {{ it.op }}; transform: {{ it.tf }}; transition: opacity .6s ease, transform .6s ease;">
+            <sc-if value="{{ it.isT }}" hint-placeholder-val="{{ false }}">
+              <div style="font-family:'Noto Serif SC',serif; font-size:13px; color:var(--ink-light); letter-spacing:0.08em; margin:22px 0 14px 0;">{{ it.text }}</div>
+            </sc-if>
+            <sc-if value="{{ it.isQ }}" hint-placeholder-val="{{ false }}">
+              <a href="老树 · 阅读页.dc.html" style="display:block; border:0.5px solid var(--line); border-radius:8px; padding:20px 22px; margin-bottom:12px; text-decoration:none; color:var(--ink); transition: border-color .3s ease;" style-hover="border-color: var(--u-soft)">
+                <div style="font-family:'Noto Serif SC',serif; font-size:16px; line-height:1.95; letter-spacing:0.04em;">{{ it.text }}</div>
+                <div style="margin-top:10px; font-size:11.5px; letter-spacing:0.14em; color:var(--ink-light);">{{ it.meta }}</div>
+              </a>
+            </sc-if>
+            <sc-if value="{{ it.isR }}" hint-placeholder-val="{{ false }}">
+              <a href="老树 · 阅读页.dc.html" style="display:block; border:0.5px solid var(--line); border-radius:8px; padding:20px 22px; margin-bottom:12px; text-decoration:none; color:var(--ink); transition: border-color .3s ease;" style-hover="border-color: var(--u-soft)">
+                <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+                  <span style="font-size:12.5px; font-weight:500; color: {{ it.c }};">{{ it.name }}</span>
+                  <span style="font-size:10.5px; color: {{ it.c }}; border:0.5px solid {{ it.c }}; border-radius:4px; padding:1px 5px;">{{ it.badge }}</span>
+                  <span style="font-family:Spectral,serif; font-feature-settings:'onum'; font-size:11.5px; color:var(--ink-light); margin-left:auto;">{{ it.meta }}</span>
+                </div>
+                <div style="font-family:'Noto Serif SC',serif; font-size:14px; line-height:1.95; color:var(--ink);">{{ it.text }}</div>
+              </a>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="max-width:600px; width:100%; margin:0 auto; padding:0 44px 56px 44px; box-sizing:border-box;">
+    <div style="display:flex; align-items:baseline; gap:20px;">
+      <input value="{{ q }}" onInput="{{ onQ }}" onKeyDown="{{ onKey }}" placeholder="带着一个真实的问题来。" style="flex:1; background:transparent; border:none; border-bottom:1px solid var(--line); padding:10px 2px; font-family:'Noto Serif SC',serif; font-size:16px; letter-spacing:0.04em; color:var(--ink); outline:none; border-radius:0;">
+      <span onClick="{{ ask }}" style="font-size:13px; letter-spacing:0.16em; color:var(--cinnabar); cursor:pointer; white-space:nowrap;" style-hover="color: var(--seal)">问路</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  state = { q: '', turns: [], night: false };
+
+  paths = [
+    { keys: ['离开', '关系', '分手', '走'], items: [
+      { kind: 't', text: '这里有一句。' },
+      { kind: 'q', text: '持而盈之,不如其已。', meta: '第九章 · 通行本' },
+      { kind: 't', text: '有人在此写过。' },
+      { kind: 'r', name: '沈一苇', badge: '证', wood: true, meta: '2023 · 第十一章', text: '这三年住的从来不是墙和柜子,是它们围出来的那块空。搬走那天,我才第一次读懂。' },
+      { kind: 't', text: '要过去看看吗。' }
+    ]},
+    { keys: ['失去', '死', '离世', '走了'], items: [
+      { kind: 't', text: '这里有一句。' },
+      { kind: 'q', text: '飘风不终朝,骤雨不终日。天地尚不能久,而况于人乎?', meta: '第二十三章 · 通行本' },
+      { kind: 't', text: '两千年前也有人念着它。' },
+      { kind: 'q', text: '死而不亡者寿。', meta: '第三十三章 · 通行本' },
+      { kind: 't', text: '要过去看看吗。' }
+    ]},
+    { keys: ['工作', '累', '掏空', '卷'], items: [
+      { kind: 't', text: '这里有一句。' },
+      { kind: 'q', text: '虚而不屈,动而愈出。', meta: '第五章 · 通行本' },
+      { kind: 't', text: '有人在此问过。' },
+      { kind: 'r', name: '周菡', badge: '疑', meta: '2025 · 第十一章', text: '杯壁是利,杯空是用——那手握住杯子的时候,握住的是利,还是用?' },
+      { kind: 't', text: '要过去看看吗。' }
+    ]}
+  ];
+
+  fallback = [
+    { kind: 't', text: '从这里走起。' },
+    { kind: 'q', text: '三十辐,共一毂,当其无,有车之用。', meta: '第十一章 · 通行本' },
+    { kind: 't', text: '有人在此写过。' },
+    { kind: 'r', name: '陈拾', badge: '疑', meta: '2026 · 第十一章', text: '空,要被围起来、被需要,才成其为用?' },
+    { kind: 't', text: '要过去看看吗。' }
+  ];
+
+  componentDidMount() {
+    if (this.props.night) document.body.setAttribute('data-night', '1');
+  }
+  componentWillUnmount() { clearInterval(this._rev); }
+
+  ask(text) {
+    const q = (text != null ? text : this.state.q).trim();
+    if (!q) return;
+    const path = this.paths.find(p => p.keys.some(k => q.indexOf(k) >= 0));
+    const items = (path ? path.items : this.fallback).map(it => Object.assign({}, it));
+    const turn = { q, items, shown: 0 };
+    this.setState(s => ({ q: '', turns: s.turns.concat([turn]) }));
+    clearInterval(this._rev);
+    this._rev = setInterval(() => {
+      this.setState(s => {
+        const turns = s.turns.slice();
+        const t = turns[turns.length - 1];
+        if (!t || t.shown >= t.items.length) { clearInterval(this._rev); return {}; }
+        turns[turns.length - 1] = Object.assign({}, t, { shown: t.shown + 1 });
+        return { turns };
+      });
+    }, 550);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const examples = ['我该不该离开这段关系?', '怎么面对失去?', '工作把我掏空了。'].map(t => ({
+      t, go: () => this.ask(t)
+    }));
+    const turns = st.turns.map(turn => ({
+      q: turn.q,
+      items: turn.items.map((it, i) => ({
+        isT: it.kind === 't', isQ: it.kind === 'q', isR: it.kind === 'r',
+        text: it.text, meta: it.meta || '', name: it.name || '', badge: it.badge || '',
+        c: it.wood ? 'var(--cinnabar)' : 'var(--verdigris)',
+        op: i < turn.shown ? 1 : 0,
+        tf: i < turn.shown ? 'none' : 'translateY(8px)'
+      }))
+    }));
+    return {
+      q: st.q, turns, examples,
+      empty: st.turns.length === 0,
+      onQ: (e) => this.setState({ q: e.target.value }),
+      onKey: (e) => { if (e.key === 'Enter') this.ask(); },
+      ask: () => this.ask(),
+      nightLabel: st.night ? '昼读' : '夜读',
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

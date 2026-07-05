@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 道德經 · 一本书的传记</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+      <span style="font-size:12px; color:var(--ink-light); letter-spacing:0.08em; margin-left:4px;">千年经典的活体年轮库</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <a href="老树 · 考据.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">考据</a>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+      <span style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">登录</span>
+    </div>
+  </div>
+
+  <div data-screen-label="书籍详情 · Hero" style="max-width:720px; margin:0 auto; padding:88px 44px 96px 44px; position:relative; box-sizing:border-box;">
+    <div style="position:absolute; right:44px; top:80px; writing-mode:vertical-rl; font-family:'Noto Serif SC',serif; font-size:15px; letter-spacing:0.5em; color:var(--ink-light); opacity:0.55; line-height:2;">有之以为利,无之以为用</div>
+    <div style="font-size:12px; color:var(--ink-light); letter-spacing:0.3em; margin-bottom:32px;">書架 · 道家</div>
+    <div style="font-family:'Noto Serif SC',serif; font-size:60px; font-weight:400; letter-spacing:0.18em; line-height:1.3;">道德經</div>
+    <div style="margin-top:20px; font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:13px; color:var(--ink-light); letter-spacing:0.06em;">约成书于公元前 400 年 · 五千言 · 已生长约 2,400 年 · 137 层年轮</div>
+    <div style="margin-top:40px; font-family:'Noto Serif SC',serif; font-size:21px; letter-spacing:0.05em;">五千字,两千年读不尽。</div>
+    <div style="margin-top:36px;">
+      <a href="老树 · 阅读页.dc.html" style="font-size:13px; letter-spacing:0.14em; color:var(--cinnabar); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--seal)">进入第十一章,亲自读 →</a>
+    </div>
+  </div>
+
+  <div data-screen-label="传记时间线" style="max-width:720px; margin:0 auto; padding:0 44px 60px 44px; box-sizing:border-box;">
+    <div style="font-size:12px; letter-spacing:0.5em; color:var(--ink-light); margin-bottom:56px;">一本书的传记</div>
+    <div style="position:relative; padding-left:140px;">
+      <div style="position:absolute; left:120px; top:8px; bottom:8px; width:1px; background:var(--line);"></div>
+      <sc-for list="{{ nodes }}" as="n" hint-placeholder-count="4">
+        <div data-node="{{ n.idx }}" style="position:relative; margin-bottom:76px; opacity: {{ n.op }}; transform: {{ n.tf }}; transition: opacity .7s ease, transform .7s ease;">
+          <div style="position:absolute; left:-140px; top:3px; width:106px; text-align:right; font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:13px; letter-spacing:0.04em; color: {{ n.yc }};">{{ n.yl }}</div>
+          <div style="position:absolute; left:-24px; top:6px; width:7px; height:7px; border-radius:50%; background: {{ n.dot }};"></div>
+          <div style="font-size:14px; font-weight:500; letter-spacing:0.04em; margin-bottom:10px;">{{ n.who }}</div>
+          <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2.05; letter-spacing:0.02em; color:var(--ink);">{{ n.story }}</div>
+          <sc-if value="{{ n.anchor }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:16px; font-family:'Noto Serif SC',serif; font-size:15px; line-height:1.9; color:var(--ink); border-left:2px solid var(--u-soft); padding-left:14px;">{{ n.anchor }}</div>
+          </sc-if>
+          <sc-if value="{{ n.special }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:20px; border:0.5px solid var(--line); border-radius:8px; padding:20px 22px;">
+              <div style="font-size:11.5px; letter-spacing:0.24em; color:var(--cinnabar); margin-bottom:16px;">经文在此改变</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 24px; font-family:'Noto Serif SC',serif; font-size:13.5px; line-height:1.9;">
+                <div style="font-size:11px; font-family:'Noto Sans SC',sans-serif; color:var(--ink-light); letter-spacing:0.1em;">读了两千年的通行本</div>
+                <div style="font-size:11px; font-family:'Noto Sans SC',sans-serif; color:var(--ink-light); letter-spacing:0.1em;">前 168 年下葬的帛书本</div>
+                <div>道可道,非<span style="color:var(--cinnabar);">常</span>道</div>
+                <div>道可道也,非<span style="color:var(--cinnabar);">恒</span>道也</div>
+                <div><span style="color:var(--cinnabar);">三十</span>辐,<span style="color:var(--cinnabar);">共</span>一毂</div>
+                <div><span style="color:var(--cinnabar);">卅</span>辐,<span style="color:var(--cinnabar);">同</span>一毂</div>
+                <div><span style="color:var(--cinnabar);">道</span>经在前,德经在后</div>
+                <div><span style="color:var(--cinnabar);">德</span>经在前,道经在后</div>
+              </div>
+              <div style="margin-top:16px;">
+                <a href="老树 · 阅读页.dc.html" style="font-size:12px; letter-spacing:0.1em; color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">在阅读页把时间拖过 1973,亲眼看经文改变 →</a>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ n.today }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:20px; display:flex; flex-direction:column; gap:14px;">
+              <sc-for list="{{ rings }}" as="r" hint-placeholder-count="3">
+                <div style="border:0.5px solid var(--line); border-radius:8px; padding:16px 18px;">
+                  <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:8px;">
+                    <span style="font-size:13px; font-weight:500; color: {{ r.c }};">{{ r.name }}</span>
+                    <span style="font-size:11px; color: {{ r.c }}; border:0.5px solid {{ r.c }}; border-radius:4px; padding:1px 6px;">{{ r.badge }}</span>
+                    <span style="font-size:11px; letter-spacing:0.1em; color: {{ r.c }};">{{ r.tag }}</span>
+                    <span style="font-family:Spectral,serif; font-feature-settings:'onum'; font-size:12px; color:var(--ink-light); margin-left:auto;">{{ r.date }}</span>
+                  </div>
+                  <div style="font-family:'Noto Serif SC',serif; font-size:13.5px; line-height:1.9; color:var(--ink);">{{ r.text }}</div>
+                </div>
+              </sc-for>
+              <div style="margin-top:10px;">
+                <a href="老树 · 阅读页.dc.html" style="font-size:13px; letter-spacing:0.14em; color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">进入,亲自落笔 →</a>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ n.askOff }}" hint-placeholder-val="{{ true }}">
+            <div style="margin-top:14px; text-align:right;">
+              <span onClick="{{ n.ask }}" style="font-size:12px; letter-spacing:0.08em; color:var(--ink-light); cursor:pointer; transition:color .3s ease;" style-hover="color: var(--cinnabar)">与守树人细究此节 →</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{ n.askOn }}" hint-placeholder-val="{{ false }}">
+            <div style="margin-top:14px; text-align:right; font-family:'Noto Serif SC',serif; font-size:12.5px; color:var(--ink-light);">读是自由的。落笔与问路,需要一个名字。 <span style="color:var(--cinnabar); cursor:pointer;">→ 留下名字</span></div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="text-align:center; padding:0 44px 96px 44px; font-size:12px; letter-spacing:0.2em; color:var(--ink-light);">越老的书,年轮越厚。</div>
+</div>
+
+<a href="老树 · 守树人.dc.html" style="position:fixed; right:28px; bottom:22px; font-size:12px; letter-spacing:0.1em; color:var(--ink-light); text-decoration:none; transition:color .3s ease; z-index:20;" style-hover="color: var(--cinnabar)">问守树人</a></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  state = { night: false, seen: {}, wall: null };
+
+  data = [
+    { yl: '前 400 前后', who: '守藏史出关', story: '传说周室的守藏史老聃西出函谷,关令尹喜请他留书。他写下五千言,不知所终。传说无从核证——但这五千字,真的留了下来。', anchor: '道可道,非常道。' },
+    { yl: '前 300 前后', who: '郭店楚简', story: '现存最早的《老子》抄在竹简上,随一位无名的教书人下葬。仅今本三分之一,字句与后世多有不同——书的童年,和我们读到的它,并不是同一副面孔。' },
+    { yl: '汉', who: '河上公章句', story: '一位传说住在河边的隐士,把它读成养生之书:治身与治国同理。此后近千年,多数中国人经由他的句读认识老子。' },
+    { yl: '公元 240', who: '王弼注', story: '二十三岁的王弼以「无」统摄全书,注成次年病逝。此后近两千年,通行本几乎都循他的底本流传——一个年轻人的读法,成了这本书的正文。', anchor: '毂所以能统三十辐者,无也。' },
+    { yl: '唐', who: '敦煌写本', story: '藏经洞封存着数百件《老子》写卷,出自无名抄经生之手。有人抄错了字,有人在卷尾记下当天的天气——普通人的笔迹,第一次大规模进入这本书的历史。' },
+    { yl: '1893', who: '托尔斯泰', story: '晚年的托尔斯泰读到《道德经》,着手节译成俄文,把「无为」抄进日记。一位写了百万字的人,晚年信服了五千字。' },
+    { yl: '1934', who: 'Arthur Waley 英译', story: '汉学家 Waley 译出 The Way and Its Power,英语世界第一次读到有严格学术依据的《道德经》。此后西方的每一个译本,都要先回答:同不同意 Waley。' },
+    { yl: '1968', who: 'George Harrison《The Inner Light》', story: '他把第四十七章谱成《The Inner Light》,作为单曲 B 面发行——两千三百岁的句子,进了当年的排行榜。', anchor: '不出户,知天下;不窥牖,见天道。' },
+    { yl: '1973', who: '马王堆帛书出土', story: '长沙马王堆三号汉墓打开,两卷帛书《老子》重见天日,抄写于公元前二世纪。人们发现:最早的它,和读了两千年的它,不完全是同一本书。', special: true, cin: true },
+    { yl: '1997', who: 'Ursula K. Le Guin 英译', story: '小说家 Le Guin 断续用了四十年完成她的英译。她不识古汉语,靠逐字对照与直觉把它译成诗;序言里她说,这是她读了一生的书。', anchor: '“where the wheel isn’t / is where it’s useful.”' },
+    { yl: '今 · 2026', who: '这本书仍在被写下', story: '时间线的最后一站,是正在生长的年轮。最近入木与新生的批注:', today: true, cin: true, noAsk: true }
+  ];
+
+  rings = [
+    { name: '沈一苇', badge: '证', tag: '入木', date: '2023', wood: true, text: '站在腾空的房间中央忽然明白:这三年住的从来不是墙和柜子,是它们围出来的那块空。搬走那天,我才第一次读懂。' },
+    { name: '周菡', badge: '疑', tag: '青芽', date: '2025', text: '杯壁是利,杯空是用——那手握住杯子的时候,握住的是利,还是用?' },
+    { name: '陈拾', badge: '疑', tag: '青芽', date: '2026', text: '空,要被围起来、被需要,才成其为用?' }
+  ];
+
+  componentDidMount() {
+    const night = !!this.props.night;
+    if (night) document.body.setAttribute('data-night', '1');
+    this.setState({ night });
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !window.IntersectionObserver) {
+      const all = {};
+      this.data.forEach((d, i) => { all[i] = true; });
+      this.setState({ seen: all });
+      return;
+    }
+    this._io = new IntersectionObserver((entries) => {
+      const add = {};
+      let any = false;
+      entries.forEach(en => {
+        if (en.isIntersecting) { add[en.target.getAttribute('data-node')] = true; any = true; this._io.unobserve(en.target); }
+      });
+      if (any) this.setState(s => ({ seen: Object.assign({}, s.seen, add) }));
+    }, { threshold: 0.12 });
+    const observe = () => document.querySelectorAll('[data-node]').forEach(el => this._io.observe(el));
+    setTimeout(observe, 150);
+    setTimeout(observe, 1200);
+  }
+
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+  }
+
+  renderVals() {
+    const st = this.state;
+    const nodes = this.data.map((d, i) => Object.assign({}, d, {
+      idx: i,
+      op: st.seen[i] ? 1 : 0,
+      tf: st.seen[i] ? 'none' : 'translateY(20px)',
+      yc: d.cin ? 'var(--cinnabar)' : 'var(--ink-light)',
+      dot: d.cin ? 'var(--cinnabar)' : 'var(--ink-light)',
+      askOff: !d.noAsk && st.wall !== i,
+      askOn: !d.noAsk && st.wall === i,
+      ask: () => this.setState({ wall: i })
+    }));
+    const rings = this.rings.map(r => Object.assign({}, r, {
+      c: r.wood ? 'var(--cinnabar)' : 'var(--verdigris)'
+    }));
+    return {
+      nodes, rings,
+      nightLabel: st.night ? '昼读' : '夜读',
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

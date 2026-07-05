@@ -1,0 +1,247 @@
+/* 千年书架 — the shelf every book sits on: a historical axis, not a grid. */
+
+.shelf-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink);
+}
+
+.shelf-stage {
+  position: relative;
+  flex: 1;
+  min-height: 600px;
+}
+
+.shelf-intro {
+  position: absolute;
+  top: 9%;
+  left: 44px;
+  max-width: 520px;
+}
+
+.shelf-headline {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 27px;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+.shelf-sub {
+  margin-top: 14px;
+  font-size: 13px;
+  line-height: 1.9;
+  color: var(--ink-light);
+  letter-spacing: 0.04em;
+}
+
+.shelf-axis {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  bottom: 26%;
+  height: 260px;
+}
+
+.shelf-baseline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--line);
+}
+
+.shelf-tick {
+  position: absolute;
+  bottom: -4px;
+}
+
+.shelf-tick-mark {
+  width: 1px;
+  height: 6px;
+  background: var(--line);
+  margin: 0 auto;
+}
+
+.shelf-tick-label {
+  margin-top: 8px;
+  transform: translateX(-50%);
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 11px;
+  white-space: nowrap;
+  color: var(--ink-light);
+}
+
+.shelf-ghost {
+  position: absolute;
+  bottom: 2px;
+  border: 1px dashed var(--line);
+  box-sizing: border-box;
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out both;
+}
+
+.shelf-slot {
+  position: absolute;
+  bottom: 2px;
+}
+
+.shelf-grow {
+  width: 100%;
+  height: 100%;
+  transform-origin: bottom;
+  animation: growY 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.shelf-grow-pending {
+  opacity: 0.55;
+}
+
+.shelf-spine {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  text-decoration: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.5s ease;
+}
+.shelf-spine:hover {
+  transform: translateY(-6px);
+}
+
+.shelf-spine-pending {
+  cursor: default;
+  border-style: dashed;
+  color: var(--ink-light);
+}
+.shelf-spine-pending:hover {
+  transform: none;
+}
+
+.shelf-spine-rule {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+}
+.shelf-spine-rule.left {
+  left: 5px;
+}
+.shelf-spine-rule.right {
+  right: 5px;
+}
+
+.shelf-spine-title {
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.4em;
+  line-height: 1;
+}
+
+.shelf-seal {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -3px;
+  width: 6px;
+  height: 6px;
+  background: var(--cinnabar);
+}
+
+.shelf-card {
+  position: absolute;
+  bottom: calc(100% + 20px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 264px;
+  background: var(--paper);
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 30px rgba(31, 29, 26, 0.08);
+  animation: cardIn 0.3s ease-out both;
+  z-index: 5;
+}
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+.shelf-card-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+
+.shelf-card-line {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.shelf-card-meta {
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-bottom: 12px;
+}
+
+.shelf-card-cta {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--cinnabar);
+}
+.shelf-card-cta-muted {
+  color: var(--verdigris);
+}
+
+.shelf-foot {
+  position: absolute;
+  bottom: 8%;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+}
+.shelf-foot-left {
+  left: 64px;
+}
+.shelf-foot-right {
+  right: 64px;
+  letter-spacing: 0.12em;
+  text-align: right;
+  max-width: 320px;
+}
+
+@media (max-width: 720px) {
+  .shelf-intro,
+  .shelf-foot-left,
+  .shelf-foot-right {
+    left: 24px;
+    right: 24px;
+  }
+  .shelf-axis {
+    left: 24px;
+    right: 24px;
+  }
+}

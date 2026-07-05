@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 考据 · 这句话真的是他说的吗</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes stepIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform:none; } }
+    input::placeholder { color: var(--ink-light); opacity: .6; }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <span style="color:var(--ink);">考据</span>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+      <span style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">登录</span>
+    </div>
+  </div>
+
+  <div data-screen-label="考据入口" style="max-width:600px; margin:0 auto; padding:120px 44px 120px 44px; box-sizing:content-box;">
+    <div style="font-family:'Noto Serif SC',serif; font-size:30px; letter-spacing:0.08em; line-height:1.8; text-align:center;">这句话,真的是他说的吗?</div>
+    <div style="text-align:center; font-size:13px; color:var(--ink-light); margin-top:16px; letter-spacing:0.05em;">粘贴一句「古人说」。两千年的书页替你翻检。</div>
+
+    <div style="margin-top:72px; display:flex; align-items:baseline; gap:20px;">
+      <input value="{{ q }}" onInput="{{ onQ }}" onKeyDown="{{ onKey }}" placeholder="老子说:……" style="flex:1; background:transparent; border:none; border-bottom:1px solid var(--line); padding:10px 2px; font-family:'Noto Serif SC',serif; font-size:18px; letter-spacing:0.04em; color:var(--ink); outline:none; border-radius:0;">
+      <span onClick="{{ check }}" style="font-size:13px; letter-spacing:0.16em; color:var(--cinnabar); cursor:pointer; white-space:nowrap;" style-hover="color: var(--seal)">查验</span>
+    </div>
+
+    <div style="margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
+      <sc-for list="{{ chips }}" as="c" hint-placeholder-count="3">
+        <span onClick="{{ c.go }}" style="font-family:'Noto Serif SC',serif; font-size:12.5px; color:var(--ink-light); border:0.5px solid var(--line); border-radius:4px; padding:5px 12px; cursor:pointer; transition: color .3s ease, border-color .3s ease;" style-hover="color: var(--cinnabar); border-color: var(--u-soft)">{{ c.t }}</span>
+      </sc-for>
+    </div>
+
+    <div style="min-height:280px; margin-top:72px;">
+      <sc-if value="{{ checking }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center; font-size:13px; color:var(--ink-light); letter-spacing:0.1em; animation: stepIn .3s ease-out both;">正在翻检传世本与出土本……</div>
+      </sc-if>
+
+      <sc-if value="{{ isReal }}" hint-placeholder-val="{{ false }}">
+        <div style="border:0.5px solid var(--line); border-radius:8px; padding:32px 34px; animation: stepIn .5s ease-out both;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <div style="width:8px; height:8px; background:var(--cinnabar);"></div>
+            <span style="font-size:12px; letter-spacing:0.24em; color:var(--cinnabar);">真 · 见于《道德經》</span>
+          </div>
+          <div style="font-family:'Noto Serif SC',serif; font-size:20px; line-height:2.1; letter-spacing:0.05em; color:var(--ink);">{{ realFull }}</div>
+          <div style="margin-top:18px; font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:12.5px; color:var(--ink-light); letter-spacing:0.05em;">{{ realMeta }}</div>
+          <div style="display:flex; gap:32px; margin-top:30px; font-size:13px; letter-spacing:0.1em;">
+            <a href="老树 · 阅读页.dc.html" style="color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">进入句子房间 →</a>
+            <a href="老树 · 分享卡.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">生成分享卡 →</a>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isFake }}" hint-placeholder-val="{{ false }}">
+        <div style="border:0.5px solid var(--line); border-radius:8px; padding:32px 34px; animation: stepIn .5s ease-out both;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px;">
+            <div style="width:8px; height:8px; border:1px solid var(--ink-light); box-sizing:border-box;"></div>
+            <span style="font-size:12px; letter-spacing:0.24em; color:var(--ink-light);">伪 · 托名</span>
+          </div>
+          <div style="font-family:'Noto Serif SC',serif; font-size:17px; line-height:2; letter-spacing:0.04em; color:var(--ink-light);">「{{ fakeQ }}」</div>
+          <div style="margin-top:20px; font-family:'Noto Serif SC',serif; font-size:15px; line-height:2.05; color:var(--ink);">此句不见于《道德經》任何传世本与出土本。</div>
+          <div style="margin-top:10px; font-size:13px; line-height:2; color:var(--ink-light);">{{ fakeSrc }}</div>
+          <div style="display:flex; gap:32px; margin-top:30px; font-size:13px; letter-spacing:0.1em;">
+            <a href="老树 · 分享卡.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">生成伪托卡 →</a>
+            <a href="老树 · 道德经.dc.html" style="color:var(--cinnabar); text-decoration:none;" style-hover="color: var(--seal)">去读真的 →</a>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;}
+}">
+class Component extends DCLogic {
+  state = { q: '', phase: 'idle', result: null };
+
+  reals = [
+    { k: '上善若水', full: '上善若水,水善利万物而不争。', meta: '第八章 · 此句已生长约 2,400 年,年轮密布' },
+    { k: '当其无', full: '三十辐,共一毂,当其无,有车之用。', meta: '第十一章 · 此句已生长约 2,400 年,年轮密布' },
+    { k: '有之以为利', full: '故有之以为利,无之以为用。', meta: '第十一章 · 此句已生长约 2,400 年,年轮密布' },
+    { k: '千里之行', full: '千里之行,始于足下。', meta: '第六十四章 · 此句已生长约 2,400 年,年轮密布' },
+    { k: '知止', full: '知足不辱,知止不殆,可以长久。', meta: '第四十四章 · 此句已生长约 2,400 年,年轮密布' }
+  ];
+
+  fakes = [
+    { k: '天欲其亡', src: '最早可溯源至 20 世纪初的英文谚语 “Whom the gods would destroy, they first make mad”,后被安上「老子曰」在中文网络流传。' },
+    { k: '性格决定命运', src: '最早可溯源至近代西方格言的汉译,与《道德經》无涉。' }
+  ];
+
+  componentDidMount() {
+    if (this.props.night) document.body.setAttribute('data-night', '1');
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  run(text) {
+    const q = (text != null ? text : this.state.q).trim();
+    if (!q) return;
+    this.setState({ q, phase: 'checking', result: null });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => {
+      const real = this.reals.find(r => q.indexOf(r.k) >= 0);
+      if (real) { this.setState({ phase: 'real', result: real }); return; }
+      const fake = this.fakes.find(f => q.indexOf(f.k) >= 0);
+      this.setState({
+        phase: 'fake',
+        result: fake || { src: '最早出处待考——它很可能比你以为的年轻得多。' }
+      });
+    }, 900);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const chips = ['上善若水', '天欲其亡,必令其狂', '当其无,有车之用'].map(t => ({
+      t, go: () => this.run(t)
+    }));
+    return {
+      q: st.q, chips,
+      onQ: (e) => this.setState({ q: e.target.value, phase: 'idle' }),
+      onKey: (e) => { if (e.key === 'Enter') this.run(); },
+      check: () => this.run(),
+      checking: st.phase === 'checking',
+      isReal: st.phase === 'real',
+      isFake: st.phase === 'fake',
+      realFull: st.phase === 'real' ? st.result.full : '',
+      realMeta: st.phase === 'real' ? st.result.meta : '',
+      fakeQ: st.q,
+      fakeSrc: st.phase === 'fake' ? st.result.src : '',
+      nightLabel: st.night ? '昼读' : '夜读',
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

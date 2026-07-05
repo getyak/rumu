@@ -1,0 +1,408 @@
+/* 阅读页 — the time slider is the whole point: drag it, and the scripture's
+   own history rises up sentence by sentence. */
+
+.read-page {
+  min-height: 100vh;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink);
+}
+
+.read-slider {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--paper);
+  transition: background-color 0.5s ease;
+  padding: 12px 44px 14px 44px;
+  border-bottom: 0.5px solid var(--line);
+}
+
+.read-slider-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.read-slider-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-bottom: 4px;
+  font-family: Spectral, serif;
+  font-feature-settings: 'onum';
+}
+
+.read-slider-hint {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  transition: opacity 0.4s ease;
+}
+
+.read-slider-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.read-slider-step {
+  font-family: Spectral, serif;
+  font-size: 18px;
+  line-height: 26px;
+  color: var(--ink-light);
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+}
+.read-slider-step:hover {
+  color: var(--cinnabar);
+}
+
+.read-track {
+  position: relative;
+  height: 38px;
+  cursor: ew-resize;
+  touch-action: none;
+  outline: none;
+  flex: 1;
+}
+
+.read-track-base {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 12px;
+  height: 2px;
+  background: var(--line);
+}
+
+.read-track-fill {
+  position: absolute;
+  left: 0;
+  top: 12px;
+  height: 2px;
+  background: var(--u-soft);
+}
+
+.read-tick {
+  position: absolute;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.read-tick-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  transition: opacity 0.5s ease;
+}
+
+.read-handle {
+  position: absolute;
+  top: 4px;
+  margin-left: -9px;
+  pointer-events: none;
+}
+
+.read-handle-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cinnabar);
+  background: var(--paper);
+  box-sizing: border-box;
+}
+.read-handle-dot::after {
+  content: '';
+  display: block;
+  width: 5px;
+  height: 5px;
+  margin: 4.75px auto;
+  border-radius: 50%;
+  background: var(--cinnabar);
+}
+
+.read-handle-label {
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--cinnabar);
+  white-space: nowrap;
+  margin-top: 3px;
+  transform: translateX(calc(-50% + 8px));
+  text-align: center;
+}
+
+.read-body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 72px 44px 140px 44px;
+}
+
+.read-column {
+  flex: 0 1 640px;
+  min-width: 280px;
+}
+
+.read-crumb {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  margin-bottom: 56px;
+  color: var(--ink-light);
+}
+
+.read-crumb-sep {
+  color: var(--ink-light);
+}
+
+.read-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22px;
+  line-height: 2.4;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+  text-align: center;
+}
+
+.read-sentence {
+  margin-bottom: 12px;
+}
+.read-sentence:last-child {
+  margin-bottom: 0;
+}
+
+.read-sentence-clickable {
+  cursor: pointer;
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.45s ease;
+}
+.read-sentence-clickable:hover {
+  border-bottom-color: var(--cinnabar) !important;
+}
+
+.read-compare-span {
+  border-bottom: 1px dashed transparent;
+  transition: border-color 0.6s ease;
+}
+
+.read-footnote-slot {
+  height: 26px;
+  margin-top: 36px;
+  text-align: center;
+}
+
+.read-footnote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+  animation: fadeIn 0.35s ease-out both;
+}
+
+.read-wall {
+  text-align: center;
+  margin-top: 64px;
+  font-size: 13px;
+}
+
+.read-wall-inert {
+  font-family: 'Noto Serif SC', serif;
+  color: var(--ink-light);
+  letter-spacing: 0.05em;
+}
+
+.read-ask-cta {
+  color: var(--cinnabar);
+  cursor: pointer;
+}
+
+.read-drawer {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.38s ease-out;
+  flex-shrink: 0;
+}
+.read-drawer.is-open {
+  width: 476px;
+}
+
+.read-drawer-inner {
+  width: 392px;
+  margin-left: 48px;
+  padding-left: 36px;
+  border-left: 0.5px solid var(--line);
+  box-sizing: content-box;
+}
+
+.read-drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-bottom: 26px;
+  letter-spacing: 0.14em;
+}
+
+.read-drawer-head-actions {
+  display: flex;
+  gap: 18px;
+  letter-spacing: 0;
+}
+
+.read-drawer-quote {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 17px;
+  line-height: 1.9;
+  color: var(--ink);
+  border-left: 2px solid var(--cinnabar);
+  padding-left: 14px;
+  margin-bottom: 6px;
+}
+
+.read-layer {
+  transition: opacity 0.45s ease;
+}
+
+.read-layer-follow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 16px;
+}
+.read-layer-follow-rule {
+  width: 1px;
+  height: 22px;
+  background: var(--u-soft);
+  margin-left: 7px;
+}
+.read-layer-follow span {
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 0.08em;
+}
+
+.read-layer-folded {
+  padding: 16px 0;
+  border-top: 0.5px solid var(--line);
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+.read-layer-folded:hover {
+  color: var(--ink);
+}
+
+.read-layer-full {
+  position: relative;
+  padding: 24px 0;
+  border-top: 0.5px solid var(--line);
+}
+
+.read-layer-ai-badge {
+  position: absolute;
+  top: 24px;
+  right: 0;
+  font-size: 10.5px;
+  color: var(--ink-light);
+  letter-spacing: 0.12em;
+  border: 0.5px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
+.read-layer-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.read-layer-src {
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.read-layer-yl {
+  font-family: Spectral, serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--ink-light);
+}
+
+.read-layer-badge {
+  font-size: 11px;
+  border: 0.5px solid;
+  border-radius: 4px;
+  padding: 1px 6px;
+  line-height: 1.5;
+}
+
+.read-layer-tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.read-layer-body {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14.5px;
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+}
+
+.read-layer-sig {
+  margin-top: 10px;
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+}
+
+.read-drawer-write {
+  margin-top: 4px;
+  padding: 26px 0 40px 0;
+  border-top: 0.5px solid var(--line);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 900px) {
+  .read-body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .read-drawer.is-open {
+    width: auto;
+    margin-top: 48px;
+  }
+  .read-drawer-inner {
+    width: auto;
+    margin-left: 0;
+    padding-left: 0;
+    border-left: none;
+    border-top: 0.5px solid var(--line);
+    padding-top: 32px;
+  }
+}
+
+@media (max-width: 520px) {
+  .read-slider,
+  .read-body {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .read-text {
+    font-size: 19px;
+  }
+}

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>老树 · 道德經 · 第十一章</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500&amp;family=Noto+Sans+SC:wght@400;500&amp;family=Spectral:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; background: var(--paper); transition: background-color .5s ease;
+      --paper:#F7F4EC; --ink:#1F1D1A; --ink-light:#8A8578; --cinnabar:#B03A2E; --seal:#7A241B;
+      --verdigris:#5E7A6B; --line:rgba(31,29,26,.14); --u-soft:rgba(176,58,46,.32); }
+    body[data-night="1"] { --paper:#15161A; --ink:#E8E3D6; --ink-light:#7E7A6E; --cinnabar:#C9564A; --seal:#D8776C;
+      --line:rgba(232,227,214,.13); --u-soft:rgba(201,86,74,.42); }
+    @keyframes layerIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: none; } }
+    ::selection { background: rgba(176,58,46,.18); }
+    @media (prefers-reduced-motion: reduce) { * { animation-duration:.01ms !important; transition-duration:.01ms !important; } }
+  </style>
+</helmet>
+<div style="min-height:100vh; font-family:'Noto Sans SC',sans-serif; color:var(--ink);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 44px 16px 44px;">
+    <a href="老树 · 首页书架.dc.html" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="9" fill="none" stroke="var(--cinnabar)" stroke-width="1"></circle><circle cx="11" cy="11" r="5.5" fill="none" stroke="var(--cinnabar)" stroke-width="0.8" opacity="0.65"></circle><circle cx="11" cy="11" r="2" fill="none" stroke="var(--cinnabar)" stroke-width="0.7" opacity="0.4"></circle></svg>
+      <span style="font-family:'Noto Serif SC',serif; font-size:17px; font-weight:500; letter-spacing:0.3em; color:var(--ink);">老树</span>
+      <span style="font-size:12px; color:var(--ink-light); letter-spacing:0.08em; margin-left:4px;">千年经典的活体年轮库</span>
+    </a>
+    <div style="display:flex; gap:28px; font-size:13px; color:var(--ink-light);">
+      <a href="老树 · 考据.dc.html" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--ink)">考据</a>
+      <span onClick="{{ toggleNight }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ nightLabel }}</span>
+      <span style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">登录</span>
+    </div>
+  </div>
+
+  <div data-screen-label="时间滑杆" style="position:sticky; top:0; z-index:10; background:var(--paper); transition: background-color .5s ease; padding:12px 44px 14px 44px; border-bottom:0.5px solid var(--line);">
+    <div style="max-width:1040px; margin:0 auto;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; font-size:11px; color:var(--ink-light); margin-bottom:4px;">
+        <span style="font-family:Spectral,serif; font-feature-settings:'onum';">前 600</span>
+        <span style="font-size:12px; letter-spacing:0.06em; transition:opacity .4s ease;">{{ hintLabel }}</span>
+        <span>今</span>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:16px;">
+      <span onClick="{{ stepPrev }}" title="上一处年轮" style="font-family:Spectral,serif; font-size:18px; line-height:26px; color:var(--ink-light); cursor:pointer; user-select:none; transition:color .3s ease;" style-hover="color: var(--cinnabar)">‹</span>
+      <div onPointerDown="{{ trackDown }}" onPointerMove="{{ trackMove }}" onPointerUp="{{ trackUp }}" tabindex="0" role="slider" aria-label="年轮轴:拖动或点击回到任何一年" style="position:relative; height:38px; cursor:ew-resize; touch-action:none; outline:none; flex:1;">
+        <div style="position:absolute; left:0; right:0; top:12px; height:2px; background:var(--line);"></div>
+        <div style="position:absolute; left:0; top:12px; height:2px; background:var(--u-soft); width: {{ handlePct }};"></div>
+        <sc-for list="{{ ticks }}" as="t" hint-placeholder-count="6">
+          <div onClick="{{ t.go }}" onMouseEnter="{{ t.enter }}" onMouseLeave="{{ t.leave }}" style="position:absolute; top:5px; left: {{ t.pct }}; width:16px; height:16px; margin-left:-8px; opacity: {{ t.op }}; transition: opacity .5s ease; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+            <div style="width:4px; height:4px; border-radius:50%; background: {{ t.c }};"></div>
+          </div>
+        </sc-for>
+        <div style="position:absolute; top:4px; left: {{ handlePct }}; margin-left:-9px; pointer-events:none;">
+          <div style="width:16px; height:16px; border-radius:50%; border:1.5px solid var(--cinnabar); background:var(--paper); display:flex; align-items:center; justify-content:center; box-sizing:border-box;">
+            <div style="width:5px; height:5px; border-radius:50%; background:var(--cinnabar);"></div>
+          </div>
+          <div style="font-family:Spectral,'Noto Sans SC',serif; font-feature-settings:'onum'; font-size:12px; color:var(--cinnabar); white-space:nowrap; margin-top:3px; transform:translateX(calc(-50% + 8px)); text-align:center;">{{ yearLabel }}</div>
+        </div>
+      </div>
+      <span onClick="{{ stepNext }}" title="下一处年轮" style="font-family:Spectral,serif; font-size:18px; line-height:26px; color:var(--ink-light); cursor:pointer; user-select:none; transition:color .3s ease;" style-hover="color: var(--cinnabar)">›</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:center; align-items:flex-start; padding:88px 44px 140px 44px;">
+
+    <div data-screen-label="阅读页 · 第十一章" style="flex:0 1 640px; min-width:280px;">
+      <div style="text-align:center; font-size:12px; letter-spacing:0.6em; padding-left:0.6em; margin-bottom:64px;"><a href="老树 · 道德经.dc.html" title="回到这本书的传记" style="color:var(--ink-light); text-decoration:none; transition:color .3s ease;" style-hover="color: var(--cinnabar)">道德經</a><span style="color:var(--ink-light);"> · 第十一章</span></div>
+      <div style="font-family:'Noto Serif SC',serif; font-size:22px; line-height:2.4; letter-spacing:0.05em; color:var(--ink); text-align:center;">
+        <div style="margin-bottom:12px;">
+          <span onClick="{{ openS1 }}" style="cursor:pointer; padding-bottom:3px; border-bottom:1px solid {{ u1c }}; transition:border-color .45s ease;" style-hover="border-bottom-color: var(--cinnabar)"><span onMouseEnter="{{ cmpOn }}" onMouseLeave="{{ cmpOff }}" style="border-bottom:1px dashed {{ vC }}; transition:border-color .6s ease;">三十</span>辐,<span onMouseEnter="{{ cmpOn }}" onMouseLeave="{{ cmpOff }}" style="border-bottom:1px dashed {{ vC }}; transition:border-color .6s ease;">共</span>一毂,当其无,有车之用。</span>
+        </div>
+        <div style="margin-bottom:12px;">埏埴以为器,当其无,有器之用。</div>
+        <div style="margin-bottom:12px;">
+          <span onClick="{{ openS3 }}" style="cursor:pointer; padding-bottom:3px; border-bottom:1px solid {{ u3c }}; transition:border-color .45s ease;" style-hover="border-bottom-color: var(--cinnabar)">凿户牖以为室,当其无,有室之用。</span>
+        </div>
+        <div>
+          <span onClick="{{ openS4 }}" style="cursor:pointer; padding-bottom:3px; border-bottom:1px solid {{ u4c }}; transition:border-color .45s ease;" style-hover="border-bottom-color: var(--cinnabar)">故有之以为利,无之以为用。</span>
+        </div>
+      </div>
+      <div style="height:26px; margin-top:36px; text-align:center; font-family:'Noto Serif SC',serif; font-size:13px; color:var(--ink-light); letter-spacing:0.06em; opacity: {{ cmpOp }}; transition:opacity .35s ease;">
+        通行本「三十辐,共一毂」<span style="color:var(--cinnabar); margin:0 10px;">·</span>帛书甲本「卅辐,同一毂」 <span style="font-family:Spectral,serif; font-feature-settings:'onum';">前 168 年下葬,1973 年重见</span>
+      </div>
+      <div style="text-align:center; margin-top:88px; font-size:13px;">
+        <sc-if value="{{ wallFootOff }}" hint-placeholder-val="{{ true }}">
+          <a href="老树 · 落笔流程.dc.html" style="color:var(--ink-light); cursor:pointer; letter-spacing:0.12em; text-decoration:none; transition:color .3s ease;" style-hover="color: var(--cinnabar)">抄录本章,获得落笔资格 →</a>
+        </sc-if>
+        <sc-if value="{{ wallFoot }}" hint-placeholder-val="{{ false }}">
+          <span style="font-family:'Noto Serif SC',serif; color:var(--ink-light); letter-spacing:0.05em;">读是自由的。落笔与问路,需要一个名字。 <span style="color:var(--cinnabar); cursor:pointer;">→ 留下名字</span></span>
+        </sc-if>
+      </div>
+    </div>
+
+    <div data-screen-label="句子房间" style="width: {{ drawerW }}; overflow:hidden; transition: width .38s ease-out; flex-shrink:0;">
+      <div style="width:392px; margin-left:48px; padding-left:36px; border-left:0.5px solid var(--line); box-sizing:content-box;">
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; color:var(--ink-light); margin-bottom:26px;">
+          <span style="letter-spacing:0.14em;">一句话的地层</span>
+          <div style="display:flex; gap:18px;">
+            <span onClick="{{ toggleFold }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">{{ foldLabel }}</span>
+            <span onClick="{{ closeDrawer }}" style="cursor:pointer; transition:color .3s ease;" style-hover="color: var(--ink)">收起</span>
+          </div>
+        </div>
+        <div style="font-family:'Noto Serif SC',serif; font-size:17px; line-height:1.9; color:var(--ink); border-left:2px solid var(--cinnabar); padding-left:14px; margin-bottom:6px;">{{ openText }}</div>
+        <sc-if value="{{ layersVisible }}" hint-placeholder-val="{{ true }}">
+          <div>
+            <sc-for list="{{ layers }}" as="L" hint-placeholder-count="3">
+              <div style="opacity: {{ L.op }}; transition: opacity .45s ease;">
+                <div style="animation: layerIn .45s ease-out both; animation-delay: {{ L.delay }};">
+                  <sc-if value="{{ L.follow }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; align-items:center; gap:10px; padding-top:16px;">
+                      <div style="width:1px; height:22px; background:var(--u-soft); margin-left:7px;"></div>
+                      <span style="font-size:11px; color:var(--ink-light); letter-spacing:0.08em;">{{ L.follow }}</span>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ L.folded }}" hint-placeholder-val="{{ false }}">
+                    <div onClick="{{ toggleFold }}" style="padding:16px 0; border-top:0.5px solid {{ L.lineC }}; font-size:12px; color:var(--ink-light); letter-spacing:0.08em; cursor:pointer;" style-hover="color: var(--ink)">底图 · AI 整理 · 已折叠 →</div>
+                  </sc-if>
+                  <sc-if value="{{ L.full }}" hint-placeholder-val="{{ true }}">
+                    <div style="position:relative; padding:24px 0; border-top:0.5px solid {{ L.lineC }};">
+                      <sc-if value="{{ L.ai }}" hint-placeholder-val="{{ false }}">
+                        <div style="position:absolute; top:24px; right:0; font-size:10.5px; color:var(--ink-light); letter-spacing:0.12em; border:0.5px solid var(--line); border-radius:4px; padding:2px 7px;">底图 · AI 整理</div>
+                      </sc-if>
+                      <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+                        <span style="font-size:13.5px; font-weight:500; color: {{ L.srcC }};">{{ L.src }}</span>
+                        <span style="font-family:Spectral,serif; font-feature-settings:'onum'; font-size:12px; color:var(--ink-light);">{{ L.yl }}</span>
+                        <sc-if value="{{ L.badge }}" hint-placeholder-val="{{ false }}">
+                          <span style="font-size:11px; color: {{ L.badgeC }}; border:0.5px solid {{ L.badgeC }}; border-radius:4px; padding:1px 6px; line-height:1.5;">{{ L.badge }}</span>
+                        </sc-if>
+                        <sc-if value="{{ L.tag }}" hint-placeholder-val="{{ false }}">
+                          <span style="font-size:11px; letter-spacing:0.1em; color: {{ L.tagC }};">{{ L.tag }}</span>
+                        </sc-if>
+                      </div>
+                      <div style="font-family:'Noto Serif SC',serif; font-size:14.5px; line-height:2.05; letter-spacing:0.02em; color: {{ L.bodyC }};">{{ L.body }}</div>
+                      <sc-if value="{{ L.sigLine }}" hint-placeholder-val="{{ false }}">
+                        <div style="margin-top:10px; font-size:12.5px; letter-spacing:0.04em; color: {{ L.sigC }};">{{ L.sigLine }}</div>
+                      </sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+            <div style="margin-top:4px; padding:26px 0 40px 0; border-top:0.5px solid var(--line); font-size:13px;">
+              <sc-if value="{{ wallDrawerOff }}" hint-placeholder-val="{{ true }}">
+                <span onClick="{{ showWallDrawer }}" style="color:var(--cinnabar); cursor:pointer; letter-spacing:0.16em; transition:color .3s ease;" style-hover="color: var(--seal)">在此落笔 →</span>
+              </sc-if>
+              <sc-if value="{{ wallDrawer }}" hint-placeholder-val="{{ false }}">
+                <span style="font-family:'Noto Serif SC',serif; color:var(--ink-light); letter-spacing:0.05em;">读是自由的。落笔与问路,需要一个名字。 <a href="老树 · 落笔流程.dc.html" style="color:var(--cinnabar); cursor:pointer; text-decoration:none;">→ 留下名字</a></span>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<a href="老树 · 守树人.dc.html" style="position:fixed; right:28px; bottom:22px; font-size:12px; letter-spacing:0.1em; color:var(--ink-light); text-decoration:none; transition:color .3s ease; z-index:20;" style-hover="color: var(--cinnabar)">问守树人</a></x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;night&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;氛围&quot;},
+  &quot;intro&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;动效&quot;},
+  &quot;foldAi&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;地层&quot;}
+}">
+class Component extends DCLogic {
+  MIN = -600;
+  MAX = 2026;
+
+  state = {
+    displayYear: 2026, targetYear: 2026,
+    open: null, layersVisible: false,
+    night: false, foldAi: false,
+    compare: false, hoverTick: '',
+    dragged: false, sweeping: false,
+    wallFoot: false, wallDrawer: false
+  };
+
+  events = [
+    { y: -400, label: '前 400 前后 · 《老子》约成书' },
+    { y: -168, label: '前 168 · 帛书随葬马王堆,沉睡待醒', hidden: true, verd: true },
+    { y: 100,  label: '汉 · 河上公章句' },
+    { y: 240,  label: '公元 240 · 王弼注' },
+    { y: 1893, label: '1893 · 托尔斯泰节译《道德经》' },
+    { y: 1906, label: '1906 · 冈仓天心《茶之书》引此章' },
+    { y: 1934, label: '1934 · Arthur Waley 英译' },
+    { y: 1939, label: '1939 · Frank Lloyd Wright 引老子论建筑' },
+    { y: 1973, label: '1973 · 马王堆帛书出土,经文改写', cin: true },
+    { y: 1997, label: '1997 · Le Guin 英译' },
+    { y: 2023, label: '2023 · 沈一苇「证」入木' },
+    { y: 2026, label: '2026 · 今,青芽初生' }
+  ];
+
+  sentences = [
+    { text: '三十辐,共一毂,当其无,有车之用。', earliest: 240, strata: [
+      { src: '王弼《老子注》', yl: '公元 240', year: 240, badge: '注',
+        body: '毂所以能统三十辐者,无也。以其无能受物之故,故能以寡统众也。' },
+      { src: 'Arthur Waley', yl: '1934', year: 1934, badge: '注',
+        body: '他以 “the space where there is nothing” 译「无」:用之所在,恰是一无所有之处。英语世界由此第一次系统读到此章。' },
+      { src: '帛书对照', yl: '1973', year: 1973, ai: true,
+        body: '长沙马王堆三号汉墓出土帛书甲、乙本,抄写于公元前二世纪,此句作「卅辐同一毂」。「卅」为「三十」合文;「同」与「共」义近而字异。经文的通行面貌与最早写本自此可对照。' },
+      { src: 'Ursula K. Le Guin', yl: '1997', year: 1997, badge: '注',
+        body: '“where the wheel isn’t / is where it’s useful.” 她将此章题为 The uses of not。' },
+      { src: '沈一苇', yl: '2023', year: 2023, badge: '证', tag: '入木',
+        sig: '沈一苇', date: '2023 年 12 月',
+        body: '去年冬天清空合租屋搬走,家具送人,只剩一只行李箱。站在腾空的房间中央忽然明白:这三年住的从来不是墙和柜子,是它们围出来的那块空。当其无,有室之用——搬走那天,我才第一次读懂。' },
+      { src: '陈拾', yl: '2026', year: 2026, badge: '疑', tag: '青芽', sprout: true,
+        follow: '3 年后 · 接续 沈一苇', sig: '陈拾', date: '2026 年 4 月',
+        body: '可若那房间从此一直空着,不住人、不放箱子,这「无」还有用吗?无之为用,是不是必须以有为边界——空,要被围起来、被需要,才成其为用?' }
+    ]},
+    { text: '埏埴以为器,当其无,有器之用。', earliest: null, strata: [] },
+    { text: '凿户牖以为室,当其无,有室之用。', earliest: 1906, strata: [
+      { src: '冈仓天心《茶之书》', yl: '1906', year: 1906, badge: '证',
+        body: '他借此章向西方讲茶室:真正的房间不在屋顶与四壁,而在其间的虚空。茶室因此别名「空之屋」——只在其中放入此刻需要之物,余皆留白。' },
+      { src: 'Frank Lloyd Wright', yl: '1939', year: 1939, badge: '证',
+        body: '他在伦敦演讲中说,建筑的实在不是墙与屋顶,而是其中可居的空间——“the space within to be lived in”。并承认:这个思想,老子比他早说了两千多年。' }
+    ]},
+    { text: '故有之以为利,无之以为用。', earliest: 100, strata: [
+      { src: '河上公《老子章句》', yl: '汉', year: 100, badge: '注',
+        body: '虚空者乃可用盛受万物,故曰虚无能制有形。道者空也。' },
+      { src: '注家源流', yl: '', year: 100, ai: true,
+        body: '「有」「无」在此并非对立:车、器、室三喻皆言器物因中空而成其用。历代注家于「利」「用」之分各有侧重——或以「利」属形、「用」属空,或以二者互为条件,不可偏废。' },
+      { src: '苏辙《老子解》', yl: '约 1100', year: 1100, badge: '注',
+        body: '非有则无以致其用,非无则有以施其利。有无相资,而后器成。' },
+      { src: '周菡', yl: '2025', year: 2025, badge: '疑', tag: '青芽', sprout: true,
+        sig: '周菡', date: '2025 年 8 月',
+        body: '「利」与「用」到底怎么分?杯壁是利,杯空是用——那手握住杯子的时候,握住的是利,还是用?' }
+    ]}
+  ];
+
+  componentDidMount() {
+    const night = !!this.props.night;
+    if (night) document.body.setAttribute('data-night', '1');
+    this.setState({ night, foldAi: !!this.props.foldAi });
+    this.reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    this._key = (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+        const d = e.key === 'ArrowLeft' ? -20 : 20;
+        this.setState(s => ({ targetYear: Math.max(this.MIN, Math.min(this.MAX, s.targetYear + d)), dragged: true }));
+      } else if (e.key === 'Escape') {
+        this.setState({ open: null });
+      }
+    };
+    window.addEventListener('keydown', this._key);
+
+    const loop = () => {
+      this._raf = requestAnimationFrame(loop);
+      if (this.state.sweeping) return;
+      const { displayYear, targetYear } = this.state;
+      const diff = targetYear - displayYear;
+      if (Math.abs(diff) > 0.4) {
+        this.setState({ displayYear: displayYear + diff * (this.reduced ? 1 : 0.055) });
+      } else if (displayYear !== targetYear) {
+        this.setState({ displayYear: targetYear });
+      }
+    };
+    this._raf = requestAnimationFrame(loop);
+
+    if ((this.props.intro ?? true) && !this.reduced) {
+      this.setState({ displayYear: this.MIN, targetYear: this.MIN, sweeping: true });
+      const dur = 3600, delay = 700;
+      const t0 = performance.now();
+      const step = (t) => {
+        if (!this.state.sweeping) return;
+        const p = Math.min(1, (t - t0 - delay) / dur);
+        if (p < 0) { this._sw = requestAnimationFrame(step); return; }
+        const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+        const y = this.MIN + (this.MAX - this.MIN) * e;
+        if (p < 1) {
+          this.setState({ displayYear: y, targetYear: y });
+          this._sw = requestAnimationFrame(step);
+        } else {
+          this.setState({ displayYear: this.MAX, targetYear: this.MAX, sweeping: false });
+        }
+      };
+      this._sw = requestAnimationFrame(step);
+    }
+  }
+
+  componentWillUnmount() {
+    cancelAnimationFrame(this._raf);
+    cancelAnimationFrame(this._sw);
+    window.removeEventListener('keydown', this._key);
+  }
+
+  yearFromEvent(e) {
+    const r = e.currentTarget.getBoundingClientRect();
+    const p = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+    return Math.round(this.MIN + p * (this.MAX - this.MIN));
+  }
+
+  trackDown = (e) => {
+    if (this.state.sweeping) { cancelAnimationFrame(this._sw); this.setState({ sweeping: false }); }
+    e.currentTarget.setPointerCapture(e.pointerId);
+    this._drag = true;
+    this.setState({ targetYear: this.yearFromEvent(e), dragged: true });
+  };
+  trackMove = (e) => { if (this._drag) this.setState({ targetYear: this.yearFromEvent(e) }); };
+  trackUp = () => {
+    this._drag = false;
+    this.setState(s => {
+      let t = s.targetYear, best = null;
+      for (const ev of this.events) {
+        if (ev.hidden && s.displayYear < 1973) continue;
+        if (best === null || Math.abs(ev.y - t) < Math.abs(best - t)) best = ev.y;
+      }
+      if (best !== null && Math.abs(best - t) <= 26) t = best;
+      return { targetYear: t };
+    });
+  };
+
+  stepEvent = (dir) => {
+    this.setState(s => {
+      const evs = this.events.filter(ev => !(ev.hidden && s.displayYear < 1973)).map(ev => ev.y).sort((a, b) => a - b);
+      let t;
+      if (dir > 0) { const n = evs.find(y => y > s.targetYear + 0.5); t = n != null ? n : this.MAX; }
+      else { const p = evs.slice().reverse().find(y => y < s.targetYear - 0.5); t = p != null ? p : this.MIN; }
+      return { targetYear: t, dragged: true, sweeping: false };
+    });
+  };
+
+  openRoom = (i) => {
+    this.setState({ open: i, layersVisible: false, wallDrawer: false });
+    clearTimeout(this._lt);
+    this._lt = setTimeout(() => this.setState({ layersVisible: true }), 60);
+  };
+
+  renderVals() {
+    const st = this.state;
+    const dy = st.displayYear;
+    const pct = (y) => (((y - this.MIN) / (this.MAX - this.MIN)) * 100).toFixed(2) + '%';
+    const yr = Math.round(dy);
+    const yearLabel = yr >= this.MAX ? '今 · 2026' : (yr < 0 ? '前 ' + (-yr) : '公元 ' + yr);
+
+    const ticks = this.events.map(ev => ({
+      go: () => this.setState({ targetYear: ev.y, dragged: true, sweeping: false }),
+      pct: pct(ev.y),
+      c: ev.cin ? 'var(--cinnabar)' : (ev.verd ? 'var(--verdigris)' : 'var(--ink-light)'),
+      op: (ev.hidden && dy < 1973) ? 0 : (ev.y <= dy + 0.5 ? 0.9 : 0.18),
+      enter: () => this.setState({ hoverTick: ev.label }),
+      leave: () => this.setState({ hoverTick: '' })
+    }));
+
+    const hintLabel = st.sweeping ? '两千六百年,正在生长——'
+      : (st.hoverTick || (st.dragged ? '' : '点一枚刻度、按 ‹ › 逐层走,或拖动圆点'));
+
+    const s = st.open != null ? this.sentences[st.open] : null;
+    const layers = [];
+    if (s) {
+      let idx = 0;
+      s.strata.forEach((L, i) => {
+        const folded = !!L.ai && st.foldAi;
+        const on = L.year <= dy + 0.5;
+        layers.push(Object.assign({}, L, {
+          folded, full: !folded,
+          op: on ? 1 : 0.13,
+          delay: (idx * 0.07) + 's',
+          lineC: (i === 0 || L.follow) ? 'transparent' : 'var(--line)',
+          srcC: L.ai ? 'var(--ink-light)' : 'var(--ink)',
+          bodyC: L.ai ? 'var(--ink-light)' : 'var(--ink)',
+          badgeC: L.sprout ? 'var(--verdigris)' : 'var(--cinnabar)',
+          tagC: L.sprout ? 'var(--verdigris)' : 'var(--cinnabar)',
+          sigC: L.sprout ? 'var(--verdigris)' : 'var(--cinnabar)',
+          sigLine: L.tag ? ('—— ' + L.sig + ' · ' + L.date) : ''
+        }));
+        idx++;
+      });
+    }
+
+    const uColor = (i) => {
+      const sen = this.sentences[i];
+      if (!sen.earliest) return 'transparent';
+      if (st.open === i) return 'var(--cinnabar)';
+      return dy + 0.5 >= sen.earliest ? 'var(--u-soft)' : 'transparent';
+    };
+
+    return {
+      yearLabel, handlePct: pct(Math.max(this.MIN, Math.min(this.MAX, dy))),
+      ticks, hintLabel,
+      nightLabel: st.night ? '昼读' : '夜读',
+      u1c: uColor(0), u3c: uColor(2), u4c: uColor(3),
+      vC: dy >= 1973 ? 'var(--cinnabar)' : 'transparent',
+      cmpOp: st.compare ? 1 : 0,
+      cmpOn: () => { if (this.state.displayYear >= 1973) this.setState({ compare: true }); },
+      cmpOff: () => this.setState({ compare: false }),
+      openS1: () => this.openRoom(0),
+      openS3: () => this.openRoom(2),
+      stepPrev: () => this.stepEvent(-1),
+      stepNext: () => this.stepEvent(1),
+      openS4: () => this.openRoom(3),
+      closeDrawer: () => this.setState({ open: null, compare: false }),
+      drawerW: st.open != null ? '476px' : '0px',
+      openText: s ? s.text : '',
+      layers, layersVisible: st.layersVisible,
+      foldLabel: st.foldAi ? '展开底图' : '折叠底图',
+      toggleFold: () => this.setState(x => ({ foldAi: !x.foldAi })),
+      toggleNight: () => this.setState(x => {
+        const n = !x.night;
+        if (n) document.body.setAttribute('data-night', '1');
+        else document.body.removeAttribute('data-night');
+        return { night: n };
+      }),
+      trackDown: this.trackDown, trackMove: this.trackMove, trackUp: this.trackUp,
+      wallFoot: st.wallFoot, wallFootOff: !st.wallFoot,
+      showWallFoot: () => this.setState({ wallFoot: true }),
+      wallDrawer: st.wallDrawer, wallDrawerOff: !st.wallDrawer,
+      showWallDrawer: () => this.setState({ wallDrawer: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

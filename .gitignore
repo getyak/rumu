@@ -5,14 +5,17 @@ node_modules/
 
 # Build outputs
 dist/
+dist-ssr/
 build/
 .next/
 out/
+*.tsbuildinfo
 
 # Environment
 .env
 .env.local
 .env.*.local
+*.local
 
 # Logs
 *.log
