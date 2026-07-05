@@ -178,6 +178,9 @@ export default function MyTree() {
           <span className="brand-name">老树</span>
         </a>
         <nav className="nav">
+          <a className="link-muted" href="/books/jingangjing">
+            金刚经
+          </a>
           <a className="link-muted" href="/read">
             回到阅读
           </a>
