@@ -1,8 +1,10 @@
 import type { Book } from './types'
 import { daodejing } from './daodejing'
 import { diamondSutra } from './diamondSutra'
+import { xinjing } from './xinjing'
+import { genji } from './genji'
 
-export const books: Book[] = [daodejing, diamondSutra]
+export const books: Book[] = [daodejing, diamondSutra, xinjing, genji]
 
 export function getBook(id: string | undefined): Book | undefined {
   return books.find((b) => b.id === id)
@@ -32,15 +34,5 @@ export const comingSoon: ComingSoonEntry[] = [
     fs: '12px',
     line: '身外之物,不能定义你的判断。',
     meta: '马可·奥勒留 · 已生长约 1,850 年 · 待种下',
-  },
-  {
-    id: 'genji',
-    title: '源氏物語',
-    y: 1008,
-    w: '22px',
-    h: '198px',
-    fs: '13px',
-    line: '物のあはれ——人间世事,自有其可感之情。',
-    meta: '紫式部 · 已生长约 1,000 年 · 待种下',
   },
 ]
