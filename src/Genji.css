@@ -1,0 +1,330 @@
+/* 源氏物语 · 一本书的传记 — page styles.
+   Same pattern as the unbuilt 老树 · 道德经.dc.html prototype: a hero, then a
+   vertical timeline of who kept the book alive, revealing node-by-node on
+   scroll. Kept inside the design 禁则: no counts, no gradients, no glow. */
+
+.book-hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 88px 44px 96px 44px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.book-hero-side {
+  position: absolute;
+  right: 44px;
+  top: 80px;
+  writing-mode: vertical-rl;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  opacity: 0.55;
+  line-height: 2;
+}
+
+.book-eyebrow {
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 0.3em;
+  margin-bottom: 32px;
+}
+
+.book-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.book-meta {
+  margin-top: 20px;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+}
+
+.book-tagline {
+  margin-top: 40px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 21px;
+  letter-spacing: 0.05em;
+}
+
+.book-cta {
+  margin-top: 36px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+
+/* ---- timeline ---- */
+
+.timeline-wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 44px 60px 44px;
+  box-sizing: border-box;
+}
+
+.timeline-label {
+  font-size: 12px;
+  letter-spacing: 0.5em;
+  color: var(--ink-light);
+  margin-bottom: 56px;
+}
+
+.timeline {
+  position: relative;
+  padding-left: 140px;
+}
+
+.timeline-rail {
+  position: absolute;
+  left: 120px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: var(--line);
+}
+
+.t-node {
+  position: relative;
+  margin-bottom: 76px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.t-node.is-visible {
+  opacity: 1;
+  transform: none;
+}
+.t-node:last-child {
+  margin-bottom: 0;
+}
+
+.t-year {
+  position: absolute;
+  left: -140px;
+  top: 3px;
+  width: 106px;
+  text-align: right;
+  font-family: Spectral, 'Noto Sans SC', serif;
+  font-feature-settings: 'onum';
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.t-dot {
+  position: absolute;
+  left: -24px;
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.t-who {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.t-story {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 14.5px;
+  line-height: 2.05;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.t-anchor {
+  margin-top: 16px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--ink);
+  border-left: 2px solid var(--u-soft);
+  padding-left: 14px;
+}
+
+/* ---- special: a fork in the text ---- */
+
+.t-special {
+  margin-top: 20px;
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.t-special-label {
+  font-size: 11.5px;
+  letter-spacing: 0.24em;
+  color: var(--cinnabar);
+  margin-bottom: 16px;
+}
+
+.t-special-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+
+.t-special-head {
+  font-size: 11px;
+  font-family: 'Noto Sans SC', sans-serif;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+}
+
+.t-special-note {
+  margin-top: 16px;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: var(--ink-light);
+}
+
+/* ---- today: reader rings ---- */
+
+.t-rings {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ring-card {
+  border: 0.5px solid var(--line);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+.ring-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.ring-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ring-badge {
+  font-size: 11px;
+  border: 0.5px solid;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+.ring-tag {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.ring-date {
+  font-family: Spectral, serif;
+  font-feature-settings: 'onum';
+  font-size: 12px;
+  color: var(--ink-light);
+  margin-left: auto;
+}
+
+.ring-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13.5px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.t-enter {
+  margin-top: 10px;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+}
+
+/* ---- ask the keeper ---- */
+
+.t-ask-off {
+  margin-top: 14px;
+  text-align: right;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.t-ask-on {
+  margin-top: 14px;
+  text-align: right;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 12.5px;
+  color: var(--ink-light);
+}
+
+.ask-cta {
+  color: var(--cinnabar);
+  cursor: pointer;
+}
+
+.book-footer {
+  text-align: center;
+  padding: 0 44px 96px 44px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-light);
+}
+
+.ask-keeper {
+  position: fixed;
+  right: 28px;
+  bottom: 22px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--ink-light);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  z-index: 20;
+}
+.ask-keeper:hover {
+  color: var(--cinnabar);
+}
+
+@media (max-width: 640px) {
+  .book-hero,
+  .timeline-wrap {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .book-hero-side {
+    display: none;
+  }
+  .book-title {
+    font-size: 42px;
+  }
+  .timeline {
+    padding-left: 96px;
+  }
+  .timeline-rail {
+    left: 80px;
+  }
+  .t-year {
+    left: -96px;
+    width: 66px;
+    font-size: 11.5px;
+  }
+  .t-special-grid {
+    grid-template-columns: 1fr;
+    gap: 4px 0;
+  }
+  .t-special-head:nth-child(2) {
+    margin-top: 8px;
+  }
+}

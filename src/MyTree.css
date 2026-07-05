@@ -27,55 +27,6 @@ body[data-night='1']::before {
   opacity: 0.35;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 26px 44px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-
-.brand-name {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 17px;
-  font-weight: 500;
-  letter-spacing: 0.3em;
-  color: var(--ink);
-}
-
-.nav {
-  display: flex;
-  gap: 28px;
-  font-size: 13px;
-  color: var(--ink-light);
-}
-
-/* Quiet links that warm to full ink on hover. */
-.link-muted {
-  color: var(--ink-light);
-  text-decoration: none;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-.link-muted:hover {
-  color: var(--ink);
-}
-
-.link-cinnabar {
-  color: var(--cinnabar);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-.link-cinnabar:hover {
-  color: var(--seal);
-}
-
 .stage {
   max-width: 640px;
   margin: 0 auto;
@@ -406,7 +357,6 @@ body[data-night='1']::before {
 }
 
 @media (max-width: 520px) {
-  .header,
   .stage {
     padding-left: 24px;
     padding-right: 24px;
