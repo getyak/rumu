@@ -1,8 +1,14 @@
-# rumu · 老树
+# 入木 · Rumu · 老树
 
-> 一个千年经典的活体年轮库:AI 长出土壤,人类在上面刻下署名的批注,时间让它们入木。
+> **千年经典的活体年轮库。AI 长出主干，人类刻下署名的年轮，时间让它们入木。**
+>
+> A living annotation grove for canonical books: AI grows the trunk, humans carve the rings, time drives them into the wood.
 
-不是读书 App,不是笔记工具,不是 AI 聊天产品 —— 更接近一座**可以走进去的、还在生长的碑林**。
+入木不是一个内容站,也不是一个论坛。不是读书 App,不是笔记工具,不是 AI 聊天产品——更接近一座**可以走进去的、还在生长的碑林**。在 AI 洪水里,仍然亲自读的人,在一句话的两千年里,留下自己那一圈不可磨灭的年轮。
+
+- **免登录看全部**:阅读、地层、故事,对所有人(和所有机器)开放。
+- **落笔有门槛**:抄经解锁 → 锚定选体 → 苏格拉底守门 → 时间与同侪确认「入木」。
+- **AI 只有结构,没有声音**:AI 长主干、做向导、挖故事、连图谱,但作者永不开口,AI 永不替你读书。
 
 This repository holds the 老树 product front-end: a shelf of books (`/`), each with
 its own biography (`/book/:id`) and one cultivated chapter to actually read
@@ -20,6 +26,20 @@ Two books are live:
 `论语`, `庄子`, `Meditations`, and `源氏物語` sit on the shelf as honest "待种下"
 ghosts — not yet cultivated, per the product's own rule that emptiness should
 read as room to grow, not a bug to hide.
+
+## 文档
+
+产品的完整设计见 [`docs/`](./docs/):
+
+| 文档 | 内容 |
+|------|------|
+| [00 概览](./docs/00-overview.md) | 一页读懂入木 |
+| [01 愿景与命题](./docs/01-vision-and-thesis.md) | 为什么做、名字的含义、GEO 分发论题 |
+| [02 信息架构](./docs/02-information-architecture.md) | 免登录、时间书架、书籍传记页 |
+| [03 产品形态](./docs/03-product-form.md) | 阅读页、时间滑杆、句子房间、故事集 |
+| [04 AI 与 Agent](./docs/04-ai-and-agents.md) | AI 铁律、五个接入点、守树人 |
+| [05 社区与质量](./docs/05-community-and-quality.md) | 五层归属、留存玩法、倒逼优质评论 |
+| [06 设计委托书](./docs/06-design-brief.md) | 「墨字朱批」视觉系统(给设计的 prompt) |
 
 ## 我的树 (My Tree)
 
@@ -67,6 +87,7 @@ npm run preview  # serve the production build
 | `src/theme.css` | Design tokens (墨字朱批 palette), day/night themes, keyframes |
 | `APP_NOTES.md` | Detailed notes on 我的树 specifically |
 | `design/` | The original Claude Design handoff bundle — chat transcript + all page prototypes. |
+| `docs/` | Product definition: vision, information architecture, product form, AI rules, community, design brief. |
 
 ## Not yet built
 
