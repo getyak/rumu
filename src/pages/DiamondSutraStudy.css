@@ -1,0 +1,448 @@
+/*
+ * 金剛經 · 破执 — a dedicated study page for one book only.
+ * Distinct register from DaodejingStudy.css: gilt/palm-leaf-manuscript
+ * warmth instead of jade water, and a dialectic 正-反-合 unfold instead
+ * of a strata timeline, matching how this sutra actually argues.
+ */
+
+:root {
+  --gilt: #a8752f;
+  --gilt-soft: rgba(168, 117, 47, 0.14);
+  --gilt-line: rgba(168, 117, 47, 0.34);
+  --leaf-line: rgba(31, 29, 26, 0.05);
+}
+
+body[data-night='1'] {
+  --gilt: #d1a45e;
+  --gilt-soft: rgba(209, 164, 94, 0.16);
+  --gilt-line: rgba(209, 164, 94, 0.4);
+  --leaf-line: rgba(232, 227, 214, 0.05);
+}
+
+.ds-page {
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0,
+    transparent 27px,
+    var(--leaf-line) 27px,
+    var(--leaf-line) 28px
+  );
+}
+
+.ds-shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 40px 96px;
+}
+
+.ds-hero {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--gilt-line);
+  margin-bottom: 36px;
+}
+
+.ds-hero-title {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 32px;
+  letter-spacing: 5px;
+  color: var(--ink);
+}
+
+.ds-hero-sub {
+  color: var(--gilt);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+.ds-hero-meta {
+  color: var(--ink-light);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.ds-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 44px;
+  align-items: start;
+}
+
+@media (max-width: 1000px) {
+  .ds-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* — 破执 · dialectic verses ————————————————————— */
+
+.ds-verse-label {
+  color: var(--ink-light);
+  font-size: 12px;
+  letter-spacing: 4px;
+  margin-bottom: 6px;
+}
+
+.ds-verse-caption {
+  color: var(--gilt);
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 28px;
+}
+
+.ds-verses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ds-verse-card {
+  border: 1px solid var(--gilt-line);
+  border-radius: 3px;
+  padding: 18px 22px;
+  background: linear-gradient(180deg, var(--gilt-soft), transparent 60%);
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.ds-verse-card:hover {
+  border-color: var(--gilt);
+}
+
+.ds-verse-card.is-open {
+  border-color: var(--gilt);
+  background: var(--gilt-soft);
+}
+
+.ds-verse-original {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 19px;
+  line-height: 1.9;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+.ds-verse-source {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--ink-light);
+  letter-spacing: 1px;
+}
+
+/* 正反合三栏 */
+.ds-triad {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--gilt-line);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr;
+  gap: 10px;
+  align-items: stretch;
+  animation: fadeIn 0.4s ease;
+}
+
+@media (max-width: 700px) {
+  .ds-triad {
+    grid-template-columns: 1fr;
+  }
+  .ds-triad-arrow {
+    display: none;
+  }
+}
+
+.ds-triad-col {
+  padding: 14px 14px 16px;
+  border-radius: 3px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+}
+
+.ds-triad-col.is-zheng {
+  border-color: var(--line);
+}
+.ds-triad-col.is-fan {
+  border-color: var(--cinnabar);
+  background: rgba(176, 58, 46, 0.05);
+}
+.ds-triad-col.is-he {
+  border-color: var(--gilt);
+  background: var(--gilt-soft);
+}
+
+.ds-triad-tag {
+  font-size: 11px;
+  letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.is-zheng .ds-triad-tag {
+  color: var(--ink-light);
+}
+.is-fan .ds-triad-tag {
+  color: var(--cinnabar);
+}
+.is-he .ds-triad-tag {
+  color: var(--gilt);
+}
+
+.ds-triad-text {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.ds-triad-gloss {
+  font-size: 11.5px;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+.ds-triad-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-light);
+  font-size: 16px;
+}
+
+.ds-strata {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ds-stratum {
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+.ds-stratum:last-child {
+  border-bottom: none;
+}
+
+.ds-stratum-head {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 3px;
+}
+
+.ds-stratum-src {
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.ds-stratum-year {
+  color: var(--ink-light);
+  font-size: 11px;
+}
+
+.ds-stratum-badge {
+  font-size: 10px;
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+}
+
+.ds-stratum.is-sprout .ds-stratum-src,
+.ds-stratum.is-sprout .ds-stratum-badge {
+  color: var(--verdigris);
+  border-color: var(--verdigris);
+}
+
+.ds-stratum.is-ai {
+  opacity: 0.75;
+  border-left: 2px solid var(--ink-light);
+  padding-left: 10px;
+}
+
+.ds-stratum-body {
+  color: var(--ink);
+}
+
+.ds-compare-note {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-left: 2px solid var(--gilt);
+  background: var(--gilt-soft);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* — 问法 · agent panel ————————————————————————— */
+
+.ds-agent {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ds-agent-label {
+  color: var(--gilt);
+  font-size: 12px;
+  letter-spacing: 3px;
+}
+
+.ds-agent-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.ds-agent-tab {
+  padding: 9px 6px;
+  border: 1px solid var(--gilt-line);
+  background: transparent;
+  color: var(--ink-light);
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.ds-agent-tab:hover {
+  color: var(--ink);
+  border-color: var(--gilt);
+}
+
+.ds-agent-tab.is-active {
+  color: var(--gilt);
+  border-color: var(--gilt);
+  background: var(--gilt-soft);
+}
+
+.ds-agent-role {
+  padding: 12px 14px;
+  background: var(--gilt-soft);
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--ink);
+}
+
+.ds-agent-role strong {
+  color: var(--gilt);
+  letter-spacing: 2px;
+  margin-right: 6px;
+}
+
+.ds-agent-intro {
+  margin-top: 6px;
+  color: var(--ink-light);
+}
+
+.ds-agent-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ds-agent-quick button {
+  padding: 5px 9px;
+  font-size: 11px;
+  font-family: inherit;
+  color: var(--ink-light);
+  background: transparent;
+  border: 1px dashed var(--gilt-line);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ds-agent-quick button:hover {
+  color: var(--gilt);
+  border-color: var(--gilt);
+}
+
+.ds-agent-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  border-top: 1px solid var(--gilt-line);
+  border-bottom: 1px solid var(--gilt-line);
+  padding: 12px 2px;
+}
+
+.ds-msg {
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.ds-msg-user {
+  align-self: flex-end;
+  max-width: 92%;
+  padding: 6px 10px;
+  background: rgba(176, 58, 46, 0.06);
+  border-left: 2px solid var(--cinnabar);
+}
+
+.ds-msg-agent {
+  padding: 6px 10px;
+  border-left: 2px solid var(--gilt);
+}
+
+.ds-agent-input {
+  display: flex;
+  gap: 6px;
+}
+
+.ds-agent-input input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid var(--gilt-line);
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.ds-agent-input input:focus {
+  outline: none;
+  border-color: var(--gilt);
+}
+
+.ds-agent-input button {
+  padding: 8px 12px;
+  border: 1px solid var(--gilt);
+  background: transparent;
+  color: var(--gilt);
+  font-family: inherit;
+  font-size: 12px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.ds-agent-input button:hover {
+  background: var(--gilt);
+  color: var(--paper);
+}
+
+.ds-agent-foot {
+  font-size: 11px;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+.ds-koan-strip {
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px dashed var(--gilt-line);
+  font-size: 11.5px;
+  color: var(--ink-light);
+  line-height: 1.7;
+}

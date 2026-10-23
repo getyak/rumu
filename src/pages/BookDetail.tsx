@@ -65,6 +65,22 @@ export default function BookDetail() {
           <Link className="link-cinnabar" to={`/book/${book.id}/read`}>
             {book.entryLabel}
           </Link>
+          {book.id === 'daodejing' && (
+            <>
+              <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
+              <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
+                入「学修」三区,与守树人问道 →
+              </Link>
+            </>
+          )}
+          {book.id === 'diamondSutra' && (
+            <>
+              <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
+              <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
+                入「破执」三栏,与须菩提问法 →
+              </Link>
+            </>
+          )}
         </div>
       </div>
 
