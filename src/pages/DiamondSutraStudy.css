@@ -1,0 +1,330 @@
+/* Book-specific reading; source layers stay central and guidance stays quiet. */
+.ds-page {
+  --study-muted: #6b675e;
+  --gilt: #a8752f;
+  --study-soft: rgba(168, 117, 47, 0.08);
+  --gilt-line: rgba(168, 117, 47, 0.34);
+  --leaf-line: rgba(31, 29, 26, 0.05);
+  min-height: 100vh;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  background-image: repeating-linear-gradient(180deg, transparent 0, transparent 27px, var(--leaf-line) 27px, var(--leaf-line) 28px);
+}
+
+body[data-night='1'] .ds-page {
+  --study-muted: #a8a294;
+  --gilt: #d1a45e;
+  --study-soft: rgba(209, 164, 94, 0.08);
+  --gilt-line: rgba(209, 164, 94, 0.4);
+  --leaf-line: rgba(232, 227, 214, 0.05);
+}
+
+.ds-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 40px 80px;
+}
+
+.ds-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gilt-line);
+  margin-bottom: 28px;
+}
+
+.ds-hero-title {
+  margin: 0 0 8px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: normal;
+  font-size: 34px;
+  letter-spacing: 4px;
+}
+
+.ds-hero-sub,
+.ds-hero-meta {
+  color: var(--study-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.ds-scripture {
+  max-width: 800px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.ds-chapter-label {
+  margin: 0 0 8px;
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+
+.ds-chapter-caption {
+  margin: 0 0 24px;
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.ds-verses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ds-verse {
+  min-width: 0;
+  border: 1px solid var(--gilt-line);
+  border-left: 2px solid var(--gilt);
+  background: var(--study-soft);
+}
+
+.ds-verse.is-open {
+  border-left-color: var(--cinnabar);
+}
+
+.ds-verse-heading {
+  margin: 0;
+  font-weight: normal;
+}
+
+.ds-verse-toggle {
+  display: block;
+  width: 100%;
+  padding: 16px 18px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ds-verse-toggle:hover {
+  background: var(--study-soft);
+}
+
+.ds-verse-text {
+  display: block;
+  font-family: 'Noto Serif SC', serif;
+  font-size: 21px;
+  line-height: 2;
+  letter-spacing: 1px;
+  overflow-wrap: anywhere;
+}
+
+.ds-verse-hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.ds-verse-body {
+  padding: 0 18px 18px;
+  animation: fadeIn 0.4s ease;
+}
+
+.ds-verse-body[hidden] {
+  display: none;
+}
+
+.ds-compare {
+  padding: 12px;
+  border-top: 1px dashed var(--line);
+  background: var(--paper);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.ds-compare-label {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.ds-compare p {
+  margin: 4px 0 0;
+}
+
+.ds-strata {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ds-stratum {
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.ds-stratum:last-child {
+  border-bottom: none;
+}
+
+.ds-stratum-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.ds-stratum-year,
+.ds-stratum-sig {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.ds-stratum-badge {
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  font-size: 11px;
+}
+
+.ds-stratum.is-ai {
+  opacity: 0.72;
+  padding-left: 10px;
+  border-left: 2px solid var(--study-muted);
+}
+
+.ds-stratum.is-sprout .ds-stratum-src,
+.ds-stratum.is-sprout .ds-stratum-badge {
+  color: var(--verdigris);
+}
+
+.ds-stratum.is-inmu .ds-stratum-src,
+.ds-stratum.is-inmu .ds-stratum-badge {
+  color: var(--cinnabar);
+}
+
+.ds-stratum-follow {
+  margin-bottom: 6px;
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.ds-stratum-body {
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.ds-stratum-sig {
+  margin-top: 6px;
+}
+
+.ds-verse-empty {
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.ds-guide,
+.ds-draft {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.ds-guide h2,
+.ds-draft label {
+  display: block;
+  margin: 0 0 8px;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.ds-guide-label {
+  font-size: 12px;
+}
+
+.ds-guide-question {
+  margin: 10px 0;
+}
+
+.ds-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.ds-source-links a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.ds-source-links a span + span {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.ds-draft textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  resize: vertical;
+}
+
+.ds-draft textarea::placeholder {
+  color: var(--study-muted);
+}
+
+.ds-verse-toggle:focus-visible,
+.ds-source-links a:focus-visible,
+.ds-draft textarea:focus-visible,
+.ds-stratum:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 3px;
+}
+
+.ds-stratum:target {
+  outline: 1px solid var(--cinnabar);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .ds-shell {
+    padding: 24px 18px 64px;
+  }
+
+  .ds-hero-title {
+    font-size: 28px;
+  }
+
+  .ds-verse-toggle {
+    padding: 14px;
+  }
+
+  .ds-verse-body {
+    padding: 0 14px 14px;
+  }
+
+  .ds-verse-text {
+    font-size: 19px;
+    letter-spacing: 1px;
+  }
+}

@@ -65,6 +65,22 @@ export default function BookDetail() {
           <Link className="link-cinnabar" to={`/book/${book.id}/read`}>
             {book.entryLabel}
           </Link>
+          {book.id === 'daodejing' && (
+            <>
+              <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
+              <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
+                打开本章学修页 →
+              </Link>
+            </>
+          )}
+          {book.id === 'diamondSutra' && (
+            <>
+              <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
+              <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
+                打开本分章句页 →
+              </Link>
+            </>
+          )}
         </div>
       </div>
 

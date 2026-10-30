@@ -83,11 +83,25 @@ npm run preview  # serve the production build
 | `src/pages/Bookshelf.tsx` | `/` — 千年书架, books on a shared historical axis |
 | `src/pages/BookDetail.tsx` | `/book/:id` — 书籍详情页, a book's biography timeline |
 | `src/pages/Reading.tsx` | `/book/:id/read` — 阅读页, the time slider + sentence-strata drawer |
+| `src/pages/DaodejingStudy.tsx`, `src/pages/DiamondSutraStudy.tsx` | Book-specific `/study` pages: existing scripture and layers, fixed self-question, temporary reader draft |
 | `src/components/Header.tsx`, `src/hooks/useNightMode.ts` | Shared brand/nav bar and 夜读/昼读 toggle |
 | `src/theme.css` | Design tokens (墨字朱批 palette), day/night themes, keyframes |
 | `APP_NOTES.md` | Detailed notes on 我的树 specifically |
 | `design/` | The original Claude Design handoff bundle — chat transcript + all page prototypes. |
 | `docs/` | Product definition: vision, information architecture, product form, AI rules, community, design brief. |
+
+## Book-specific reading views
+
+`/book/daodejing/study` and `/book/diamondSutra/study` offer an inline view of
+each book's existing chapter and attributed layers. A fixed self-question
+from the product guide invites the reader to write in their own words;
+source links lead back to the selected sentence's existing layers.
+
+The labelled reader draft stays in page memory and clears on refresh. It is
+not saved to My Tree or published as a ring. These pages make no model,
+account or storage calls, and provide no character dialogue or generated
+answers. The original time-slider reader remains at `/book/:id/read`,
+linked from both the book detail and study pages.
 
 ## Not yet built
 

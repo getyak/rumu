@@ -1,0 +1,330 @@
+/* Book-specific reading; source layers stay central and guidance stays quiet. */
+.dd-page {
+  --study-muted: #6b675e;
+  --jade: #4c6a5f;
+  --study-soft: rgba(76, 106, 95, 0.08);
+  --slip-line: rgba(31, 29, 26, 0.06);
+  min-height: 100vh;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Sans SC', sans-serif;
+  background-image: linear-gradient(to right, var(--slip-line) 1px, transparent 1px);
+  background-size: 32px 100%;
+  background-position: center top;
+}
+
+body[data-night='1'] .dd-page {
+  --study-muted: #a8a294;
+  --jade: #8ca79c;
+  --study-soft: rgba(140, 167, 156, 0.08);
+  --slip-line: rgba(232, 227, 214, 0.06);
+}
+
+.dd-shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 40px 80px;
+}
+
+.dd-hero {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 28px;
+}
+
+.dd-hero-title {
+  margin: 0 0 8px;
+  font-family: 'Noto Serif SC', serif;
+  font-weight: normal;
+  font-size: 34px;
+  letter-spacing: 4px;
+}
+
+.dd-hero-sub,
+.dd-hero-meta {
+  color: var(--study-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.dd-scripture {
+  max-width: 800px;
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.dd-chapter-label {
+  margin: 0 0 8px;
+  font-weight: normal;
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+
+.dd-chapter-caption {
+  margin: 0 0 24px;
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dd-verses {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dd-verse {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--jade);
+  background: var(--study-soft);
+}
+
+.dd-verse.is-open {
+  border-left-color: var(--cinnabar);
+}
+
+.dd-verse-heading {
+  margin: 0;
+  font-weight: normal;
+}
+
+.dd-verse-toggle {
+  display: block;
+  width: 100%;
+  padding: 16px 18px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dd-verse-toggle:hover {
+  background: var(--study-soft);
+}
+
+.dd-verse-text {
+  display: block;
+  font-family: 'Ma Shan Zheng', 'Noto Serif SC', 'STKaiti', serif;
+  font-size: 24px;
+  line-height: 2;
+  letter-spacing: 3px;
+  overflow-wrap: anywhere;
+}
+
+.dd-verse-hint {
+  display: block;
+  margin-top: 6px;
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.dd-verse-body {
+  padding: 0 18px 18px;
+  animation: fadeIn 0.4s ease;
+}
+
+.dd-verse-body[hidden] {
+  display: none;
+}
+
+.dd-compare {
+  padding: 12px;
+  border-top: 1px dashed var(--line);
+  background: var(--paper);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dd-compare-label {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.dd-compare p {
+  margin: 4px 0 0;
+}
+
+.dd-strata {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dd-stratum {
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.dd-stratum:last-child {
+  border-bottom: none;
+}
+
+.dd-stratum-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.dd-stratum-year,
+.dd-stratum-sig {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.dd-stratum-badge {
+  padding: 0 5px;
+  border: 1px solid currentColor;
+  font-size: 11px;
+}
+
+.dd-stratum.is-ai {
+  opacity: 0.72;
+  padding-left: 10px;
+  border-left: 2px solid var(--study-muted);
+}
+
+.dd-stratum.is-sprout .dd-stratum-src,
+.dd-stratum.is-sprout .dd-stratum-badge {
+  color: var(--verdigris);
+}
+
+.dd-stratum.is-inmu .dd-stratum-src,
+.dd-stratum.is-inmu .dd-stratum-badge {
+  color: var(--cinnabar);
+}
+
+.dd-stratum-follow {
+  margin-bottom: 6px;
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.dd-stratum-body {
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+.dd-stratum-sig {
+  margin-top: 6px;
+}
+
+.dd-verse-empty {
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dd-guide,
+.dd-draft {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  color: var(--study-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.dd-guide h2,
+.dd-draft label {
+  display: block;
+  margin: 0 0 8px;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.dd-guide-label {
+  font-size: 12px;
+}
+
+.dd-guide-question {
+  margin: 10px 0;
+}
+
+.dd-source-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.dd-source-links a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  max-width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.dd-source-links a span + span {
+  color: var(--study-muted);
+  font-size: 12px;
+}
+
+.dd-draft textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  resize: vertical;
+}
+
+.dd-draft textarea::placeholder {
+  color: var(--study-muted);
+}
+
+.dd-verse-toggle:focus-visible,
+.dd-source-links a:focus-visible,
+.dd-draft textarea:focus-visible,
+.dd-stratum:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 3px;
+}
+
+.dd-stratum:target {
+  outline: 1px solid var(--cinnabar);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .dd-shell {
+    padding: 24px 18px 64px;
+  }
+
+  .dd-hero-title {
+    font-size: 28px;
+  }
+
+  .dd-verse-toggle {
+    padding: 14px;
+  }
+
+  .dd-verse-body {
+    padding: 0 14px 14px;
+  }
+
+  .dd-verse-text {
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+}

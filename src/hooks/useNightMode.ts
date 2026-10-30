@@ -2,7 +2,9 @@ import { useCallback, useState } from 'react'
 
 /** 夜读 / 昼读 — a whole-page atmosphere toggled via a body attribute. */
 export function useNightMode() {
-  const [night, setNight] = useState(false)
+  const [night, setNight] = useState(() =>
+    typeof document !== 'undefined' && document.body?.getAttribute('data-night') === '1',
+  )
 
   const toggleNight = useCallback(() => {
     setNight((prev) => {
