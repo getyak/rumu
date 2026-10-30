@@ -69,7 +69,7 @@ export default function BookDetail() {
             <>
               <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
               <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
-                入「学修」三区,与守树人问道 →
+                打开本章学修页 →
               </Link>
             </>
           )}
@@ -77,7 +77,7 @@ export default function BookDetail() {
             <>
               <span style={{ color: 'var(--ink-light)', margin: '0 12px' }}>·</span>
               <Link className="link-cinnabar" to={`/book/${book.id}/study`}>
-                入「破执」三栏,与须菩提问法 →
+                打开本分章句页 →
               </Link>
             </>
           )}
