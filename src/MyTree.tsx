@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
+import { useNightMode } from './hooks/useNightMode'
 import './MyTree.css'
 
 /**
@@ -150,18 +151,8 @@ function BranchDetail({ branch }: { branch: Branch | null }) {
 }
 
 export default function MyTree() {
-  // Night ("夜读") is a whole-page atmosphere; the prototype toggled a body attribute.
-  const [night, setNight] = useState(false)
+  const { night, toggleNight } = useNightMode()
   const [active, setActive] = useState<string | null>(null)
-
-  const toggleNight = useCallback(() => {
-    setNight((prev) => {
-      const next = !prev
-      if (next) document.body.setAttribute('data-night', '1')
-      else document.body.removeAttribute('data-night')
-      return next
-    })
-  }, [])
 
   const activeBranch = BRANCHES.find((b) => b.id === active) ?? null
 
